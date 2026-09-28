@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Create Account | Online Shopping</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            min-height: 100vh;
+            background:
+                linear-gradient(
+                    135deg,
+                    rgba(15, 23, 42, 0.95),
+                    rgba(30, 64, 175, 0.9)
+                ),
+                #0f172a;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            padding: 30px 15px;
+        }
+
+        .signup-container {
+            width: 100%;
+            max-width: 450px;
+        }
+
+        .brand {
+            text-align: center;
+            color: white;
+            margin-bottom: 20px;
+        }
+
+        .brand h1 {
+            font-size: 28px;
+            margin-bottom: 6px;
+        }
+
+        .brand p {
+            color: #cbd5e1;
+            font-size: 14px;
+        }
+
+        .signup-card {
+            background: white;
+            border-radius: 18px;
+            padding: 35px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25);
+        }
+
+        .signup-card h2 {
+            color: #0f172a;
+            font-size: 25px;
+            margin-bottom: 8px;
+        }
+
+        .subtitle {
+            color: #64748b;
+            font-size: 14px;
+            margin-bottom: 28px;
+        }
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        label {
+            display: block;
+            font-size: 14px;
+            font-weight: 600;
+            color: #334155;
+            margin-bottom: 7px;
+        }
+
+        .input-wrapper {
+            position: relative;
+        }
+
+        input {
+            width: 100%;
+            height: 48px;
+
+            border: 1px solid #cbd5e1;
+            border-radius: 10px;
+
+            padding: 0 14px;
+
+            font-size: 15px;
+            color: #0f172a;
+
+            outline: none;
+
+            transition:
+                border-color 0.2s ease,
+                box-shadow 0.2s ease;
+        }
+
+        input::placeholder {
+            color: #94a3b8;
+        }
+
+        input:focus {
+            border-color: #2563eb;
+
+            box-shadow:
+                0 0 0 3px rgba(37, 99, 235, 0.12);
+        }
+
+        .password-input {
+            padding-right: 75px;
+        }
+
+        .toggle-password {
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+
+            border: none;
+            background: transparent;
+
+            color: #2563eb;
+            font-size: 13px;
+            font-weight: 600;
+
+            cursor: pointer;
+        }
+
+        .terms {
+            display: flex;
+            align-items: flex-start;
+            gap: 9px;
+
+            margin: 20px 0;
+        }
+
+        .terms input {
+            width: 16px;
+            height: 16px;
+            margin-top: 2px;
+        }
+
+        .terms label {
+            font-size: 13px;
+            line-height: 1.5;
+            font-weight: normal;
+            margin: 0;
+            color: #64748b;
+        }
+
+        .terms a {
+            color: #2563eb;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .submit-btn {
+            width: 100%;
+            height: 50px;
+
+            border: none;
+            border-radius: 10px;
+
+            background: #2563eb;
+            color: white;
+
+            font-size: 15px;
+            font-weight: 700;
+
+            cursor: pointer;
+
+            transition:
+                background 0.2s ease,
+                transform 0.1s ease,
+                box-shadow 0.2s ease;
+        }
+
+        .submit-btn:hover {
+            background: #1d4ed8;
+
+            box-shadow:
+                0 8px 20px rgba(37, 99, 235, 0.25);
+        }
+
+        .submit-btn:active {
+            transform: translateY(1px);
+        }
+
+        .submit-btn:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+        }
+
+        .signin {
+            text-align: center;
+            margin-top: 22px;
+
+            color: #64748b;
+            font-size: 14px;
+        }
+
+        .signin a {
+            color: #2563eb;
+            font-weight: 700;
+            text-decoration: none;
+        }
+
+        .signin a:hover {
+            text-decoration: underline;
+        }
+
+        .security {
+            text-align: center;
+            margin-top: 18px;
+
+            color: #94a3b8;
+            font-size: 12px;
+        }
+
+        @media (max-width: 500px) {
+
+            body {
+                padding: 20px 12px;
+            }
+
+            .signup-card {
+                padding: 25px 20px;
+                border-radius: 15px;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+                gap: 0;
+            }
+
+            .brand h1 {
+                font-size: 24px;
+            }
+        }
+    </style>
+</head>
+
+
+<body>
+
+<div class="signup-container">
+
+    <!-- Brand -->
+    <div class="brand">
+        <h1>ShopEase</h1>
+        <p>Your online shopping destination</p>
+    </div>
+
+
+    <!-- Signup Card -->
+    <div class="signup-card">
+
+        <h2>Create your account</h2>
+
+        <p class="subtitle">
+            Join us and start shopping today.
+        </p>
+
+
+        <form
+           <form action="{{ url_for('create_account_bp.create_account') }}" method="POST">
+
+            <!-- Names -->
+            <div class="form-row">
+
+                <div class="form-group">
+
+                    <label for="f_name">
+                        First Name
+                    </label>
+
+                    <input
+                        type="text"
+                        name="f_name"
+                        id="f_name"
+                        placeholder="Abdul"
+                        autocomplete="given-name"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="l_name">
+                        Last Name
+                    </label>
+
+                    <input
+                        type="text"
+                        name="l_name"
+                        id="l_name"
+                        placeholder="Latif"
+                        autocomplete="family-name"
+                        required
+                    >
+
+                </div>
+
+            </div>
+
+
+            <!-- Email -->
+            <div class="form-group">
+
+                <label for="email">
+                    Email Address
+                </label>
+
+                <input
+                    type="email"
+                    name="email"
+                    id="email"
+                    placeholder="you@example.com"
+                    autocomplete="email"
+                    required
+                >
+
+            </div>
+
+
+            <!-- Password -->
+            <div class="form-group">
+
+                <label for="password">
+                    Password
+                </label>
+
+                <div class="input-wrapper">
+
+                    <input
+                        type="password"
+                        name="password"
+                        id="password"
+                        class="password-input"
+                        placeholder="Create a password"
+                        autocomplete="new-password"
+                        minlength="8"
+                    >
+
+                    <button
+                        type="button"
+                        class="toggle-password"
+                        id="togglePassword"
+                    >
+                        Show
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <!-- Terms -->
+            <div class="terms">
+
+                <input
+                    type="checkbox"
+                    id="terms"
+                    required
+                >
+
+                <label for="terms">
+                    I agree to the
+                    <a href="#">Terms & Conditions</a>
+                    and
+                    <a href="#">Privacy Policy</a>.
+                </label>
+
+            </div>
+
+
+            <!-- Submit -->
+            <button
+                type="submit"
+                class="submit-btn"
+                id="submitBtn"
+            >
+                Create Account
+            </button>
+
+        </form>
+
+
+        <!-- Sign in -->
+        <div class="signin">
+
+            Already have an account?
+
+            <a href="{{ url_for('sign_in.sign_in') }}">
+                Sign in
+            </a>
+
+        </div>
+
+
+        <div class="security">
+            🔒 Your information is securely protected.
+        </div>
+
+    </div>
+
+</div>
+
+
+<script>
+
+    const passwordInput =
+        document.getElementById("password");
+
+    const togglePassword =
+        document.getElementById("togglePassword");
+
+    const signupForm =
+        document.getElementById("signupForm");
+
+    const submitBtn =
+        document.getElementById("submitBtn");
+
+
+    // Show / hide password
+    togglePassword.addEventListener("click", function () {
+
+        if (passwordInput.type === "password") {
+
+            passwordInput.type = "text";
+            togglePassword.textContent = "Hide";
+
+        } else {
+
+            passwordInput.type = "password";
+            togglePassword.textContent = "Show";
+
+        }
+
+    });
+
+
+    // Loading state
+    signupForm.addEventListener("submit", function () {
+
+        submitBtn.disabled = true;
+        submitBtn.textContent = "Creating Account...";
+
+    });
+
+</script>
+
+</body>
+</html>

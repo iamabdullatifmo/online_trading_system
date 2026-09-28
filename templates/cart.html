@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>ShopEase | My Cart</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family:
+                Inter,
+                -apple-system,
+                BlinkMacSystemFont,
+                "Segoe UI",
+                Arial,
+                sans-serif;
+
+            background: #f8fafc;
+            color: #0f172a;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* =========================
+           HEADER
+        ========================= */
+
+        .header {
+            background: white;
+            border-bottom: 1px solid #e2e8f0;
+
+            position: sticky;
+            top: 0;
+            z-index: 100;
+
+            box-shadow:
+                0 2px 10px rgba(15, 23, 42, 0.05);
+        }
+
+        .nav {
+            max-width: 1200px;
+            min-height: 72px;
+
+            margin: auto;
+            padding: 0 20px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            gap: 25px;
+        }
+
+        .logo {
+            font-size: 25px;
+            font-weight: 800;
+            color: #2563eb;
+        }
+
+        .logo span {
+            color: #0f172a;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+
+            color: #475569;
+
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .nav-links a:hover {
+            color: #2563eb;
+        }
+
+        /* =========================
+           MAIN
+        ========================= */
+
+        .main {
+            max-width: 1100px;
+
+            margin: auto;
+
+            padding: 45px 20px 70px;
+        }
+
+        .page-header {
+            margin-bottom: 30px;
+        }
+
+        .page-header h1 {
+            font-size: 32px;
+            margin-bottom: 8px;
+        }
+
+        .page-header p {
+            color: #64748b;
+        }
+
+        /* =========================
+           EMPTY CART
+        ========================= */
+
+        .empty-cart {
+            background: white;
+
+            border: 1px solid #e2e8f0;
+
+            border-radius: 16px;
+
+            padding: 70px 20px;
+
+            text-align: center;
+        }
+
+        .empty-icon {
+            font-size: 55px;
+            margin-bottom: 15px;
+        }
+
+        .empty-cart h2 {
+            margin-bottom: 10px;
+        }
+
+        .empty-cart p {
+            color: #64748b;
+            margin-bottom: 25px;
+        }
+
+        .shopping-button {
+            display: inline-block;
+
+            padding: 12px 22px;
+
+            background: #2563eb;
+
+            color: white;
+
+            border-radius: 9px;
+
+            font-weight: 700;
+        }
+
+        .shopping-button:hover {
+            background: #1d4ed8;
+        }
+
+        /* =========================
+           CART
+        ========================= */
+
+        .cart-container {
+            display: grid;
+
+            grid-template-columns: 1fr 330px;
+
+            gap: 25px;
+
+            align-items: start;
+        }
+
+        .cart-items {
+            display: flex;
+
+            flex-direction: column;
+
+            gap: 15px;
+        }
+
+        /* =========================
+           CART ITEM
+        ========================= */
+
+        .cart-item {
+            background: white;
+
+            border: 1px solid #e2e8f0;
+
+            border-radius: 14px;
+
+            padding: 18px;
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 20px;
+        }
+
+        .cart-image {
+            width: 110px;
+            height: 110px;
+
+            flex-shrink: 0;
+
+            background: #f8fafc;
+
+            border-radius: 10px;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            overflow: hidden;
+        }
+
+        .cart-image img {
+            width: 100%;
+            height: 100%;
+
+            object-fit: contain;
+
+            padding: 8px;
+        }
+
+        .cart-info {
+            flex: 1;
+        }
+
+        .cart-info h3 {
+            font-size: 18px;
+
+            margin-bottom: 8px;
+        }
+
+        .unit-price {
+            color: #64748b;
+
+            font-size: 14px;
+
+            margin-bottom: 10px;
+        }
+
+        .quantity {
+            color: #475569;
+
+            font-size: 14px;
+
+            font-weight: 600;
+        }
+
+        .cart-subtotal {
+            text-align: right;
+
+            min-width: 120px;
+        }
+
+        .cart-subtotal span {
+            display: block;
+
+            color: #64748b;
+
+            font-size: 13px;
+
+            margin-bottom: 5px;
+        }
+
+        .cart-subtotal strong {
+            color: #2563eb;
+
+            font-size: 18px;
+        }
+
+        /* =========================
+           SUMMARY
+        ========================= */
+
+        .summary {
+            background: white;
+
+            border: 1px solid #e2e8f0;
+
+            border-radius: 14px;
+
+            padding: 25px;
+
+            position: sticky;
+
+            top: 95px;
+        }
+
+        .summary h2 {
+            font-size: 21px;
+
+            margin-bottom: 22px;
+        }
+
+        .summary-row {
+            display: flex;
+
+            justify-content: space-between;
+
+            gap: 20px;
+
+            color: #64748b;
+
+            font-size: 15px;
+
+            padding-bottom: 15px;
+        }
+
+        .summary-total {
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            border-top: 1px solid #e2e8f0;
+
+            padding-top: 18px;
+
+            margin-top: 5px;
+        }
+
+        .summary-total span {
+            font-size: 17px;
+
+            font-weight: 700;
+        }
+
+        .summary-total strong {
+            color: #2563eb;
+
+            font-size: 23px;
+        }
+
+        .checkout-button {
+            width: 100%;
+
+            border: none;
+
+            margin-top: 22px;
+
+            padding: 13px;
+
+            border-radius: 9px;
+
+            background: #0f172a;
+
+            color: white;
+
+            font-size: 15px;
+
+            font-weight: 700;
+
+            cursor: pointer;
+        }
+
+        .checkout-button:hover {
+            background: #2563eb;
+        }
+
+        .continue-shopping {
+            display: block;
+
+            text-align: center;
+
+            margin-top: 15px;
+
+            color: #2563eb;
+
+            font-size: 14px;
+
+            font-weight: 600;
+        }
+
+        /* =========================
+           MOBILE
+        ========================= */
+
+        @media (max-width: 750px) {
+
+            .cart-container {
+                grid-template-columns: 1fr;
+            }
+
+            .summary {
+                position: static;
+            }
+
+        }
+
+        @media (max-width: 550px) {
+
+            .nav {
+                min-height: 60px;
+            }
+
+            .nav-links {
+                gap: 10px;
+            }
+
+            .page-header h1 {
+                font-size: 27px;
+            }
+
+            .cart-item {
+                align-items: flex-start;
+
+                flex-wrap: wrap;
+            }
+
+            .cart-image {
+                width: 90px;
+                height: 90px;
+            }
+
+            .cart-info {
+                min-width: calc(100% - 120px);
+            }
+
+            .cart-subtotal {
+                width: 100%;
+
+                text-align: left;
+
+                border-top: 1px solid #e2e8f0;
+
+                padding-top: 12px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+
+<!-- =========================
+     HEADER
+========================= -->
+
+<header class="header">
+
+    <nav class="nav">
+
+        <a
+            href="{{ url_for('items_bp.items') }}"
+            class="logo"
+        >
+            Shop<span>Ease</span>
+        </a>
+
+        <div class="nav-links">
+
+            <a href="{{ url_for('items_bp.items') }}">
+                Products
+            </a>
+
+            <a href="{{ url_for('cart_bp.cart') }}">
+                🛒 Cart
+            </a>
+
+        </div>
+
+    </nav>
+
+</header>
+
+
+<!-- =========================
+     MAIN
+========================= -->
+
+<main class="main">
+
+
+    <div class="page-header">
+
+        <h1>
+            🛒 My Cart
+        </h1>
+
+        <p>
+            Review the products you added to your cart.
+        </p>
+
+    </div>
+
+
+    {% if cart_items %}
+
+
+        <div class="cart-container">
+
+
+            <!-- =========================
+                 CART ITEMS
+            ========================= -->
+
+            <div class="cart-items">
+
+                {% for cart_item in cart_items %}
+
+                    <article class="cart-item">
+
+
+                        <!-- IMAGE -->
+
+                        <div class="cart-image">
+
+                            <img
+                                src="{{ url_for(
+                                    'static',
+                                    filename=cart_item.item.item_photo
+                                ) }}"
+                                alt="{{ cart_item.item.item_name }}"
+                            >
+
+                        </div>
+
+
+                        <!-- INFORMATION -->
+
+                        <div class="cart-info">
+
+                            <h3>
+                                {{ cart_item.item.item_name }}
+                            </h3>
+
+                            <div class="unit-price">
+
+                                GHC
+                                {{ "%.2f"|format(cart_item.item.price) }}
+                                each
+
+                            </div>
+
+                            <div class="quantity">
+
+                                Quantity:
+                                {{ cart_item.quantity }}
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- SUBTOTAL -->
+
+                        <div class="cart-subtotal">
+
+                            <span>
+                                Subtotal
+                            </span>
+
+                            <strong>
+
+                                GHC
+                                {{
+                                    "%.2f"|format(
+                                        cart_item.item.price
+                                        * cart_item.quantity
+                                    )
+                                }}
+
+                            </strong>
+
+                        </div>
+
+
+                    </article>
+
+                {% endfor %}
+
+            </div>
+
+
+            <!-- =========================
+                 ORDER SUMMARY
+            ========================= -->
+
+            <aside class="summary">
+
+                <h2>
+                    Order Summary
+                </h2>
+
+
+                <div class="summary-row">
+
+                    <span>
+                        Items
+                    </span>
+
+                    <span>
+                        {{ cart_items|length }}
+                    </span>
+
+                </div>
+
+
+                <div class="summary-total">
+
+                    <span>
+                        Total
+                    </span>
+
+                    <strong>
+
+                        GHC
+                        {{ "%.2f"|format(total_price) }}
+
+                    </strong>
+
+                </div>
+
+
+                <button
+                    type="button"
+                    class="checkout-button"
+                >
+                    Proceed to Checkout
+                </button>
+
+
+                <a
+                    href="{{ url_for('items_bp.items') }}"
+                    class="continue-shopping"
+                >
+                    ← Continue Shopping
+                </a>
+
+            </aside>
+
+
+        </div>
+
+
+    {% else %}
+
+
+        <!-- =========================
+             EMPTY CART
+        ========================= -->
+
+        <div class="empty-cart">
+
+            <div class="empty-icon">
+                🛒
+            </div>
+
+            <h2>
+                Your cart is empty
+            </h2>
+
+            <p>
+                You haven't added any products to your cart yet.
+            </p>
+
+            <a
+                href="{{ url_for('items_bp.items') }}"
+                class="shopping-button"
+            >
+                Start Shopping
+            </a>
+
+        </div>
+
+
+    {% endif %}
+
+
+</main>
+
+
+</body>
+
+</html>
