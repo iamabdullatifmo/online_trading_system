@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Payment Successful</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            padding: 40px 20px;
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f4f7fb;
+            color: #222;
+        }
+
+        .container {
+            max-width: 750px;
+            margin: 0 auto;
+        }
+
+        .success-card {
+            background: white;
+            border-radius: 16px;
+            padding: 35px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+        }
+
+        .success-icon {
+            width: 75px;
+            height: 75px;
+            margin: 0 auto 20px;
+            border-radius: 50%;
+            background: #d1fae5;
+            color: #198754;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 40px;
+            font-weight: bold;
+        }
+
+        h1 {
+            text-align: center;
+            color: #198754;
+            margin: 0 0 10px;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 30px;
+        }
+
+        .collection-message {
+            background: #fff8e1;
+            border-left: 5px solid #ffc107;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+
+        .collection-message strong {
+            color: #856404;
+        }
+
+        .section-title {
+            margin-top: 25px;
+            margin-bottom: 15px;
+            font-size: 20px;
+            color: #333;
+        }
+
+        .order-info {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 25px;
+        }
+
+        .info-row {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+            padding: 10px 0;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .info-row:last-child {
+            border-bottom: none;
+        }
+
+        .label {
+            color: #666;
+            font-weight: 500;
+        }
+
+        .value {
+            font-weight: bold;
+            text-align: right;
+            word-break: break-word;
+        }
+
+        .items {
+            margin-top: 10px;
+        }
+
+        .item-card {
+            background: #f8f9fa;
+            border: 1px solid #e5e7eb;
+            border-radius: 10px;
+            padding: 18px;
+            margin-bottom: 12px;
+        }
+
+        .item-id {
+            font-size: 18px;
+            font-weight: bold;
+            color: #0d6efd;
+            margin-bottom: 8px;
+        }
+
+        .item-detail {
+            color: #555;
+            margin: 5px 0;
+        }
+
+        .total-box {
+            background: #e8f7ee;
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .total-label {
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .total-amount {
+            font-size: 24px;
+            font-weight: bold;
+            color: #198754;
+        }
+
+        .note {
+            margin-top: 25px;
+            padding: 15px;
+            background: #eef5ff;
+            border-radius: 8px;
+            color: #444;
+            line-height: 1.6;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+
+        .button {
+            display: inline-block;
+            padding: 13px 22px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: 0.2s;
+        }
+
+        .primary {
+            background: #0d6efd;
+            color: white;
+        }
+
+        .primary:hover {
+            background: #0b5ed7;
+        }
+
+        .secondary {
+            background: #6c757d;
+            color: white;
+        }
+
+        .secondary:hover {
+            background: #5c636a;
+        }
+
+        @media (max-width: 600px) {
+
+            body {
+                padding: 20px 12px;
+            }
+
+            .success-card {
+                padding: 22px;
+            }
+
+            .info-row {
+                flex-direction: column;
+                gap: 4px;
+            }
+
+            .value {
+                text-align: left;
+            }
+
+            .total-box {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 8px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+<div class="container">
+
+    <div class="success-card">
+
+        <!-- SUCCESS ICON -->
+
+        <div class="success-icon">
+            ✓
+        </div>
+
+
+        <!-- TITLE -->
+
+        <h1>
+            Payment Successful!
+        </h1>
+
+        <p class="subtitle">
+            Thank you for your purchase.
+        </p>
+
+
+        <!-- COLLECTION MESSAGE -->
+
+        <div class="collection-message">
+
+            <strong>
+                Your order has been successfully received.
+            </strong>
+
+            <br><br>
+
+            Please keep your order information below.
+
+            Your purchased item(s) should be ready
+            for collection in approximately
+            <strong>one week</strong>.
+
+            <br><br>
+
+            Please bring your
+            <strong>Order ID</strong> or
+            <strong>Payment Reference</strong>
+            when collecting your items.
+
+        </div>
+
+
+        <!-- ORDER INFORMATION -->
+
+        <h2 class="section-title">
+            Order Information
+        </h2>
+
+        <div class="order-info">
+
+            <div class="info-row">
+
+                <span class="label">
+                    Order ID
+                </span>
+
+                <span class="value">
+                    #{{ order_id }}
+                </span>
+
+            </div>
+
+
+            <div class="info-row">
+
+                <span class="label">
+                    Payment Reference
+                </span>
+
+                <span class="value">
+                    {{ reference }}
+                </span>
+
+            </div>
+
+
+            <div class="info-row">
+
+                <span class="label">
+                    Payment Status
+                </span>
+
+                <span class="value"
+                      style="color: #198754;">
+                    Paid
+                </span>
+
+            </div>
+
+
+            <div class="info-row">
+
+                <span class="label">
+                    Collection Time
+                </span>
+
+                <span class="value">
+                    Approximately 1 week
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <!-- PURCHASED ITEMS -->
+
+        <h2 class="section-title">
+            Purchased Items
+        </h2>
+
+        <div class="items">
+
+            {% if purchased_items %}
+
+                {% for item in purchased_items %}
+
+                    <div class="item-card">
+
+                        <div class="item-id">
+
+                            Item ID:
+                            {{ item.item_id }}
+
+                        </div>
+
+                        <div class="item-detail">
+
+                            <strong>
+                                Quantity:
+                            </strong>
+
+                            {{ item.quantity }}
+
+                        </div>
+
+                        <div class="item-detail">
+
+                            <strong>
+                                Price:
+                            </strong>
+
+                            GHS
+                            {{ "%.2f"|format(item.price) }}
+
+                        </div>
+
+                    </div>
+
+                {% endfor %}
+
+            {% else %}
+
+                <p>
+                    No item information is available.
+                </p>
+
+            {% endif %}
+
+        </div>
+
+
+        <!-- TOTAL -->
+
+        <div class="total-box">
+
+            <span class="total-label">
+                Total Paid
+            </span>
+
+            <span class="total-amount">
+
+                GHS
+                {{ "%.2f"|format(amount / 100) }}
+
+            </span>
+
+        </div>
+
+
+        <!-- IMPORTANT NOTE -->
+
+        <div class="note">
+
+            <strong>Important:</strong>
+
+            Keep your Order ID and Payment Reference
+            safe. You may need them when collecting
+            your items.
+
+        </div>
+
+
+        <!-- BUTTONS -->
+
+        <div class="buttons">
+
+            <a
+                href="{{ url_for('items_bp.items') }}"
+                class="button primary"
+            >
+                Continue Shopping
+            </a>
+
+
+            <a
+                href="{{ url_for('cart_bp.cart') }}"
+                class="button secondary"
+            >
+                View Cart
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+
+</html>

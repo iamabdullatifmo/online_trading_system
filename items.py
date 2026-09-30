@@ -1,16 +1,22 @@
-from flask import Blueprint, render_template, request,session,url_for,redirect
-from models import Items,Cart
+from flask import Blueprint, render_template, request, session, url_for, redirect
+from models import Items, Cart
 from extentions import db
 
 items_bp = Blueprint("items_bp", __name__)
 
+
 @items_bp.route("/items_bp", methods=["GET", "POST"])
 def items():
+
     customer_id = session.get("customer_id")
+
+    # User must be logged in
     if not customer_id:
-     return redirect(url_for("sign_in.sign_in"))
+        return redirect(url_for("sign_in.sign_in"))
+
     search = request.args.get("q", "").strip()
 
+    # Get products
     if search:
         items = Items.query.filter(
             Items.item_name.ilike(f"%{search}%")
@@ -18,15 +24,16 @@ def items():
     else:
         items = Items.query.all()
 
-      # Add item to cart
+    # ADD TO CART
     if request.method == "POST":
         item_id = request.form.get("item_id")
         cart_quantity = request.form.get("cart_quantity")
 
-        # VALIDATE INPUT
+        # Validate input
         if not item_id or not cart_quantity:
             return render_template("shopping.html",items=items,
                 error="Please select a quantity.")
+
         try:
             item_id = int(item_id)
             cart_quantity = int(cart_quantity)
@@ -35,18 +42,19 @@ def items():
             return render_template("shopping.html",items=items,
                 error="Invalid product or quantity.")
 
-        # FIND PRODUCT
+        # Find product
         selected_item = Items.query.get(item_id)
 
         if not selected_item:
-            return render_template("shopping.html",items=items,error="Product not found.")
+            return render_template("shopping.html",items=items,
+                error="Product not found.")
 
-        # VALIDATE QUANTITY
+        # Validate quantity
         if cart_quantity <= 0:
             return render_template("shopping.html",items=items,
                 error="Quantity must be greater than zero.")
 
-        # When you try to select more than the qauntity of the item
+        # Check stock
         if cart_quantity > selected_item.quantity:
             return render_template("shopping.html",items=items,
                 error=(
@@ -54,41 +62,26 @@ def items():
                     f"{selected_item.item_name} "
                     f"left in stock."))
 
-        # CHECK EXISTING CART ITEM
-        existing_cart_item = Cart.query.filter_by(customer_id=customer_id,item_id=selected_item.id, ).first()
+        # Check if product is already in this customer's cart
+        existing_cart_item = Cart.query.filter_by(customer_id=customer_id,item_id=selected_item.id).first()
 
         if existing_cart_item:
-            # Quantity already in cart
-            new_quantity = (existing_cart_item.quantity + cart_quantity)
-
-            # Check that combined quantity
-            # doesn't exceed available stock
-            if new_quantity > selected_item.quantity:
-
-                return render_template("shopping.html",items=items,
-                    error=(
-                        f"You already have "
-                        f"{existing_cart_item.quantity} "
-                        f"in your cart. "
-                        f"Only {selected_item.quantity} "
-                        f"available." ))
-
-            # Update cart quantity
-            existing_cart_item.quantity = new_quantity
+            # Increase existing cart quantity
+            existing_cart_item.quantity += cart_quantity
 
         else:
-            # CREATE NEW CART ITEM
+            # Create new cart item
             new_cart_item = Cart(customer_id=customer_id,item_id=selected_item.id,quantity=cart_quantity)
+
             db.session.add(new_cart_item)
 
-        # REDUCE STOCK
+        # Reduce available stock
         selected_item.quantity -= cart_quantity
-
-        # SAVE DATABASE
+        # Save
         db.session.commit()
 
-        # GO DIRECTLY TO CART
+        # Go to cart
         return redirect(url_for("cart_bp.cart"))
 
-    # SHOW PRODUCTS
+    # Show products
     return render_template("shopping.html",items=items)
