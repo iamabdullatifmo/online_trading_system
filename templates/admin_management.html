@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 
@@ -49,6 +50,7 @@
 
             position: sticky;
             top: 0;
+
             z-index: 100;
         }
 
@@ -76,7 +78,6 @@
 
         .container {
             max-width: 1200px;
-
             margin: auto;
 
             padding: 35px 20px 70px;
@@ -101,6 +102,7 @@
         .success {
             background: #dcfce7;
             color: #166534;
+
             border: 1px solid #bbf7d0;
         }
 
@@ -108,6 +110,7 @@
         .error {
             background: #fee2e2;
             color: #991b1b;
+
             border: 1px solid #fecaca;
         }
 
@@ -133,7 +136,7 @@
 
 
         /* =========================
-           ADD PRODUCT CARD
+           CARD
         ========================= */
 
         .card {
@@ -148,7 +151,8 @@
             margin-bottom: 35px;
 
             box-shadow:
-                0 5px 20px rgba(
+                0 5px 20px
+                rgba(
                     15,
                     23,
                     42,
@@ -189,7 +193,6 @@
 
         label {
             font-size: 14px;
-
             font-weight: 700;
 
             margin-bottom: 7px;
@@ -254,7 +257,6 @@
         .drop-zone:hover,
         .drop-zone.dragover {
             border-color: #2563eb;
-
             background: #eff6ff;
         }
 
@@ -266,7 +268,6 @@
 
         .upload-icon {
             font-size: 45px;
-
             margin-bottom: 10px;
         }
 
@@ -300,7 +301,7 @@
 
 
         /* =========================
-           BUTTON
+           BUTTONS
         ========================= */
 
         .btn {
@@ -338,6 +339,17 @@
         .btn-delete {
             background: #fee2e2;
             color: #dc2626;
+        }
+
+
+        .btn-refresh {
+            background: #0f172a;
+            color: white;
+        }
+
+
+        .btn-refresh:hover {
+            background: #1e293b;
         }
 
 
@@ -439,6 +451,187 @@
 
 
         /* =========================
+           ORDERS HEADER
+        ========================= */
+
+        .orders-header {
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            gap: 15px;
+
+            margin-bottom: 20px;
+        }
+
+
+        .orders-header h2 {
+            margin-bottom: 0;
+        }
+
+
+        .orders-status {
+            color: #64748b;
+
+            font-size: 14px;
+        }
+
+
+        /* =========================
+           ORDERS TABLE
+        ========================= */
+
+        .orders-table {
+            min-width: 1100px;
+        }
+
+
+        .order-id {
+            font-weight: 800;
+            color: #0f172a;
+        }
+
+
+        .customer-name {
+            font-weight: 700;
+        }
+
+
+        .customer-email {
+            color: #64748b;
+
+            font-size: 13px;
+
+            margin-top: 3px;
+        }
+
+
+        .reference {
+            font-family: monospace;
+
+            font-size: 13px;
+
+            background: #f8fafc;
+
+            padding: 6px 8px;
+
+            border-radius: 6px;
+
+            display: inline-block;
+        }
+
+
+        .status {
+            display: inline-block;
+
+            padding: 6px 10px;
+
+            border-radius: 20px;
+
+            font-size: 12px;
+
+            font-weight: 800;
+
+            text-transform: uppercase;
+        }
+
+
+        .status-paid {
+            background: #dcfce7;
+            color: #166534;
+        }
+
+
+        .status-other {
+            background: #fef3c7;
+            color: #92400e;
+        }
+
+
+        .order-items {
+            margin-top: 10px;
+        }
+
+
+        .order-item {
+            background: #f8fafc;
+
+            border: 1px solid #e2e8f0;
+
+            border-radius: 8px;
+
+            padding: 10px;
+
+            margin-bottom: 7px;
+        }
+
+
+        .order-item:last-child {
+            margin-bottom: 0;
+        }
+
+
+        .order-item-name {
+            font-weight: 700;
+
+            margin-bottom: 4px;
+        }
+
+
+        .order-item-details {
+            color: #64748b;
+
+            font-size: 13px;
+        }
+
+
+        .order-total {
+            color: #2563eb;
+
+            font-weight: 800;
+
+            white-space: nowrap;
+        }
+
+
+        .empty-orders {
+            text-align: center;
+
+            padding: 50px 20px;
+
+            color: #64748b;
+        }
+
+
+        .loading-orders {
+            text-align: center;
+
+            padding: 40px;
+
+            color: #64748b;
+        }
+
+
+        .api-error {
+            background: #fee2e2;
+
+            color: #991b1b;
+
+            border: 1px solid #fecaca;
+
+            padding: 15px;
+
+            border-radius: 10px;
+
+            margin-bottom: 20px;
+
+            display: none;
+        }
+
+
+        /* =========================
            MOBILE
         ========================= */
 
@@ -476,6 +669,13 @@
 
             .page-title h1 {
                 font-size: 27px;
+            }
+
+
+            .orders-header {
+                align-items: flex-start;
+
+                flex-direction: column;
             }
 
         }
@@ -521,9 +721,7 @@
             {% for category, message in messages %}
 
                 <div class="flash {{ category }}">
-
                     {{ message }}
-
                 </div>
 
             {% endfor %}
@@ -531,6 +729,7 @@
         {% endif %}
 
     {% endwith %}
+
 
 
     <!-- =========================
@@ -549,6 +748,7 @@
         </p>
 
     </div>
+
 
 
     <!-- =========================
@@ -591,6 +791,7 @@
                 </div>
 
 
+
                 <!-- PRICE -->
 
                 <div class="form-group">
@@ -612,6 +813,7 @@
                 </div>
 
 
+
                 <!-- STOCK -->
 
                 <div class="form-group">
@@ -630,6 +832,7 @@
                     >
 
                 </div>
+
 
 
                 <!-- IMAGE -->
@@ -698,6 +901,7 @@
         </form>
 
     </section>
+
 
 
     <!-- =========================
@@ -775,9 +979,7 @@
                             <td>
 
                                 <div class="product-name">
-
                                     {{ item.item_name }}
-
                                 </div>
 
                             </td>
@@ -799,12 +1001,12 @@
 
                                 <span
                                     class="
-                                    stock
-                                    {% if item.quantity <= 5 %}
-                                        stock-low
-                                    {% else %}
-                                        stock-good
-                                    {% endif %}
+                                        stock
+                                        {% if item.quantity <= 5 %}
+                                            stock-low
+                                        {% else %}
+                                            stock-good
+                                        {% endif %}
                                     "
                                 >
 
@@ -839,6 +1041,7 @@
                                     </a>
 
 
+
                                     <!-- DELETE -->
 
                                     <form
@@ -848,9 +1051,9 @@
                                             item_id=item.id
                                         ) }}"
                                         onsubmit="
-                                        return confirm(
-                                            'Delete this product?'
-                                        );
+                                            return confirm(
+                                                'Delete this product?'
+                                            );
                                         "
                                     >
 
@@ -869,6 +1072,7 @@
                             </td>
 
                         </tr>
+
 
                     {% else %}
 
@@ -899,10 +1103,137 @@
 
     </section>
 
+
+
+    <!-- ==================================================
+         ORDERS / PURCHASES
+    ================================================== -->
+
+    <section class="card">
+
+        <div class="orders-header">
+
+            <div>
+
+                <h2>
+                    Customer Purchases
+                </h2>
+
+                <div class="orders-status">
+                    View orders, customers, payment references
+                    and purchased items.
+                </div>
+
+            </div>
+
+
+            <button
+                type="button"
+                class="btn btn-refresh"
+                id="refreshOrders"
+            >
+                ↻ Refresh Orders
+            </button>
+
+        </div>
+
+
+        <!-- API ERROR -->
+
+        <div
+            class="api-error"
+            id="ordersError"
+        ></div>
+
+
+        <div
+            class="table-wrapper"
+            id="ordersTableWrapper"
+        >
+
+            <div
+                class="loading-orders"
+                id="ordersLoading"
+            >
+                Loading orders...
+            </div>
+
+
+            <table
+                class="orders-table"
+                id="ordersTable"
+                style="display:none;"
+            >
+
+                <thead>
+
+                    <tr>
+
+                        <th>
+                            Order
+                        </th>
+
+                        <th>
+                            Customer
+                        </th>
+
+                        <th>
+                            Payment Reference
+                        </th>
+
+                        <th>
+                            Items Purchased
+                        </th>
+
+                        <th>
+                            Amount
+                        </th>
+
+                        <th>
+                            Status
+                        </th>
+
+                        <th>
+                            Date
+                        </th>
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody
+                    id="ordersBody"
+                >
+                </tbody>
+
+            </table>
+
+
+            <div
+                class="empty-orders"
+                id="emptyOrders"
+                style="display:none;"
+            >
+
+                No customer purchases found.
+
+            </div>
+
+        </div>
+
+    </section>
+
+
 </main>
 
 
+
 <script>
+
+    /* ==================================================
+       IMAGE UPLOAD
+    ================================================== */
 
     const dropZone =
         document.getElementById("dropZone");
@@ -917,9 +1248,9 @@
         document.getElementById("dropContent");
 
 
-    // =========================================
-    // CLICK TO SELECT
-    // =========================================
+    /* =========================
+       CLICK TO SELECT
+    ========================= */
 
     dropZone.addEventListener(
         "click",
@@ -929,9 +1260,9 @@
     );
 
 
-    // =========================================
-    // FILE SELECTED
-    // =========================================
+    /* =========================
+       FILE SELECTED
+    ========================= */
 
     fileInput.addEventListener(
         "change",
@@ -949,9 +1280,9 @@
     );
 
 
-    // =========================================
-    // DRAG OVER
-    // =========================================
+    /* =========================
+       DRAG OVER
+    ========================= */
 
     dropZone.addEventListener(
         "dragover",
@@ -967,9 +1298,9 @@
     );
 
 
-    // =========================================
-    // DRAG LEAVE
-    // =========================================
+    /* =========================
+       DRAG LEAVE
+    ========================= */
 
     dropZone.addEventListener(
         "dragleave",
@@ -983,9 +1314,9 @@
     );
 
 
-    // =========================================
-    // DROP
-    // =========================================
+    /* =========================
+       DROP
+    ========================= */
 
     dropZone.addEventListener(
         "drop",
@@ -1006,7 +1337,9 @@
 
                 fileInput.files = files;
 
-                showPreview(files[0]);
+                showPreview(
+                    files[0]
+                );
 
             }
 
@@ -1014,9 +1347,9 @@
     );
 
 
-    // =========================================
-    // IMAGE PREVIEW
-    // =========================================
+    /* =========================
+       IMAGE PREVIEW
+    ========================= */
 
     function showPreview(file) {
 
@@ -1052,6 +1385,454 @@
         reader.readAsDataURL(file);
 
     }
+
+
+
+    /* ==================================================
+       ORDERS API
+    ================================================== */
+
+    const ordersBody =
+        document.getElementById(
+            "ordersBody"
+        );
+
+    const ordersTable =
+        document.getElementById(
+            "ordersTable"
+        );
+
+    const ordersLoading =
+        document.getElementById(
+            "ordersLoading"
+        );
+
+    const emptyOrders =
+        document.getElementById(
+            "emptyOrders"
+        );
+
+    const ordersError =
+        document.getElementById(
+            "ordersError"
+        );
+
+    const refreshOrders =
+        document.getElementById(
+            "refreshOrders"
+        );
+
+
+    /* =========================
+       LOAD ORDERS
+    ========================= */
+
+    async function loadOrders() {
+
+        ordersLoading.style.display =
+            "block";
+
+        ordersTable.style.display =
+            "none";
+
+        emptyOrders.style.display =
+            "none";
+
+        ordersError.style.display =
+            "none";
+
+        ordersBody.innerHTML = "";
+
+
+        try {
+
+            const response =
+                await fetch(
+                    "{{ url_for('admin.admin_orders') }}",
+                    {
+                        method: "GET",
+
+                        headers: {
+                            "Accept":
+                                "application/json"
+                        }
+                    }
+                );
+
+
+            const data =
+                await response.json();
+
+
+            /* =========================
+               AUTHENTICATION ERROR
+            ========================= */
+
+            if (response.status === 401) {
+
+                throw new Error(
+                    "Admin authentication required. Please log in again."
+                );
+
+            }
+
+
+            if (!response.ok || !data.success) {
+
+                throw new Error(
+                    data.message ||
+                    "Unable to load orders."
+                );
+
+            }
+
+
+            /* =========================
+               NO ORDERS
+            ========================= */
+
+            if (
+                !data.orders ||
+                data.orders.length === 0
+            ) {
+
+                ordersLoading.style.display =
+                    "none";
+
+                emptyOrders.style.display =
+                    "block";
+
+                return;
+
+            }
+
+
+            /* =========================
+               DISPLAY ORDERS
+            ========================= */
+
+            data.orders.forEach(
+                order => {
+
+                    const row =
+                        document.createElement(
+                            "tr"
+                        );
+
+
+                    /* CUSTOMER */
+
+                    const customer =
+                        order.customer || {};
+
+
+                    let customerHTML = `
+                        <div class="customer-name">
+                            ${escapeHTML(
+                                customer.username ||
+                                "Unknown customer"
+                            )}
+                        </div>
+
+                        <div class="customer-email">
+                            ${escapeHTML(
+                                customer.email ||
+                                "No email"
+                            )}
+                        </div>
+                    `;
+
+
+                    /* ITEMS */
+
+                    let itemsHTML =
+                        `<div class="order-items">`;
+
+
+                    if (
+                        order.items &&
+                        order.items.length > 0
+                    ) {
+
+                        order.items.forEach(
+                            item => {
+
+                                itemsHTML += `
+
+                                    <div class="order-item">
+
+                                        <div class="order-item-name">
+                                            ${escapeHTML(
+                                                item.item_name
+                                            )}
+                                        </div>
+
+                                        <div class="order-item-details">
+
+                                            Item ID:
+                                            ${escapeHTML(
+                                                String(
+                                                    item.item_id
+                                                )
+                                            )}
+
+                                            <br>
+
+                                            Quantity:
+                                            ${escapeHTML(
+                                                String(
+                                                    item.quantity
+                                                )
+                                            )}
+
+                                            <br>
+
+                                            Price:
+                                            GHC
+                                            ${Number(
+                                                item.price
+                                            ).toFixed(2)}
+
+                                            <br>
+
+                                            Subtotal:
+                                            GHC
+                                            ${Number(
+                                                item.subtotal
+                                            ).toFixed(2)}
+
+                                        </div>
+
+                                    </div>
+
+                                `;
+
+                            }
+                        );
+
+                    } else {
+
+                        itemsHTML += `
+                            <div class="order-item-details">
+                                No items recorded.
+                            </div>
+                        `;
+
+                    }
+
+
+                    itemsHTML +=
+                        `</div>`;
+
+
+                    /* STATUS */
+
+                    const status =
+                        String(
+                            order.status || "unknown"
+                        );
+
+
+                    const statusClass =
+                        status.toLowerCase() === "paid"
+                            ? "status-paid"
+                            : "status-other";
+
+
+                    /* DATE */
+
+                    let formattedDate =
+                        "Unknown";
+
+
+                    if (order.created_at) {
+
+                        const date =
+                            new Date(
+                                order.created_at
+                            );
+
+
+                        if (
+                            !isNaN(
+                                date.getTime()
+                            )
+                        ) {
+
+                            formattedDate =
+                                date.toLocaleString();
+
+                        }
+
+                    }
+
+
+                    /* CREATE ROW */
+
+                    row.innerHTML = `
+
+                        <td>
+
+                            <div class="order-id">
+                                #${escapeHTML(
+                                    String(
+                                        order.order_id
+                                    )
+                                )}
+                            </div>
+
+                        </td>
+
+
+                        <td>
+                            ${customerHTML}
+                        </td>
+
+
+                        <td>
+
+                            <span class="reference">
+
+                                ${escapeHTML(
+                                    order.payment_reference ||
+                                    "No reference"
+                                )}
+
+                            </span>
+
+                        </td>
+
+
+                        <td>
+
+                            ${itemsHTML}
+
+                        </td>
+
+
+                        <td>
+
+                            <span class="order-total">
+
+                                GHC
+                                ${Number(
+                                    order.amount || 0
+                                ).toFixed(2)}
+
+                            </span>
+
+                        </td>
+
+
+                        <td>
+
+                            <span
+                                class="status ${statusClass}"
+                            >
+
+                                ${escapeHTML(
+                                    status
+                                )}
+
+                            </span>
+
+                        </td>
+
+
+                        <td>
+
+                            ${escapeHTML(
+                                formattedDate
+                            )}
+
+                        </td>
+
+                    `;
+
+
+                    ordersBody.appendChild(
+                        row
+                    );
+
+                }
+            );
+
+
+            ordersLoading.style.display =
+                "none";
+
+            ordersTable.style.display =
+                "table";
+
+        }
+
+        catch (error) {
+
+            console.error(
+                "ORDERS API ERROR:",
+                error
+            );
+
+
+            ordersLoading.style.display =
+                "none";
+
+
+            ordersError.textContent =
+                error.message ||
+                "Failed to load orders.";
+
+
+            ordersError.style.display =
+                "block";
+
+        }
+
+    }
+
+
+
+    /* ==================================================
+       ESCAPE HTML
+       Prevents API data from being interpreted
+       as HTML/JavaScript.
+    ================================================== */
+
+    function escapeHTML(value) {
+
+        const div =
+            document.createElement(
+                "div"
+            );
+
+        div.textContent =
+            value;
+
+        return div.innerHTML;
+
+    }
+
+
+
+    /* ==================================================
+       REFRESH BUTTON
+    ================================================== */
+
+    refreshOrders.addEventListener(
+        "click",
+        loadOrders
+    );
+
+
+
+    /* ==================================================
+       LOAD ORDERS WHEN PAGE OPENS
+    ================================================== */
+
+    document.addEventListener(
+        "DOMContentLoaded",
+        loadOrders
+    );
 
 </script>
 
