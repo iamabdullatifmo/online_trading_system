@@ -1,8 +1,10 @@
+
 from flask import Blueprint, render_template, session, redirect, url_for
 from models import Cart
 from extentions import db
 
 cart_bp = Blueprint("cart_bp", __name__)
+
 
 @cart_bp.route("/my_cart", methods=["GET"])
 def cart():
@@ -14,6 +16,7 @@ def cart():
             url_for("sign_in.sign_in")
         )
 
+    # Retrieve customer's cart items
     cart_items = Cart.query.filter_by(
         customer_id=customer_id
     ).all()
@@ -31,16 +34,22 @@ def cart():
 
         if cart_item.item:
 
+            print("ITEM NAME:", cart_item.item.item_name)
+
+            print("ITEM PRICE:", cart_item.item.price)
+
+            # Retrieve product description
             print(
-                "ITEM NAME:",
-                cart_item.item.item_name
+                "ITEM DESCRIPTION:",
+                cart_item.item.description
             )
 
             print(
-                "ITEM PRICE:",
-                cart_item.item.price
+                "ITEM IMAGE:",
+                cart_item.item.item_photo
             )
 
+            # Calculate total price
             total_price += (
                 float(cart_item.item.price)
                 * cart_item.quantity
@@ -57,25 +66,38 @@ def cart():
         total_price=total_price
     )
 
+
 @cart_bp.route("/remove_from_cart/<int:cart_id>", methods=["POST"])
 def remove_from_cart(cart_id):
 
     customer_id = session.get("customer_id")
 
     if not customer_id:
-        return redirect(url_for("sign_in.sign_in"))
+        return redirect(
+            url_for("sign_in.sign_in")
+        )
 
     # Find only this customer's cart item
-    cart_item = Cart.query.filter_by(id=cart_id,customer_id=customer_id).first()
+    cart_item = Cart.query.filter_by(
+        id=cart_id,
+        customer_id=customer_id
+    ).first()
 
     if not cart_item:
-        return redirect(url_for("cart_bp.cart"))
+        return redirect(
+            url_for("cart_bp.cart")
+        )
 
-    # Return the cart quantity back to stock
-    cart_item.item.quantity += cart_item.quantity
+    # Return quantity to stock
+    if cart_item.item:
 
-    # Remove from cart
+        cart_item.item.quantity += cart_item.quantity
+
+    # Remove item from cart
     db.session.delete(cart_item)
+
     db.session.commit()
 
-    return redirect(url_for("cart_bp.cart"))
+    return redirect(
+        url_for("cart_bp.cart")
+    )

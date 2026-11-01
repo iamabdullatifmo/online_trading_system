@@ -1,14 +1,13 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>ShopEase | Products</title>
 
     <style>
-
         * {
             margin: 0;
             padding: 0;
@@ -16,14 +15,8 @@
         }
 
         body {
-            font-family:
-                Inter,
-                -apple-system,
-                BlinkMacSystemFont,
-                "Segoe UI",
-                Arial,
-                sans-serif;
-
+            font-family: Inter, -apple-system, BlinkMacSystemFont,
+                "Segoe UI", Arial, sans-serif;
             background: #f8fafc;
             color: #0f172a;
         }
@@ -33,49 +26,35 @@
             color: inherit;
         }
 
-        button,
-        input {
+        button, input {
             font: inherit;
         }
 
-        /* =========================
-           HEADER
-        ========================= */
+        /* HEADER */
 
         .header {
             background: white;
             border-bottom: 1px solid #e2e8f0;
-
             position: sticky;
             top: 0;
             z-index: 100;
-
-            box-shadow:
-                0 2px 10px rgba(15, 23, 42, 0.05);
+            box-shadow: 0 2px 10px rgba(15, 23, 42, 0.05);
         }
 
         .nav {
             max-width: 1200px;
             min-height: 72px;
-
             margin: auto;
             padding: 0 20px;
-
             display: flex;
             align-items: center;
             justify-content: space-between;
-
             gap: 25px;
         }
-
-        /* =========================
-           LOGO
-        ========================= */
 
         .logo {
             font-size: 25px;
             font-weight: 800;
-
             color: #2563eb;
             white-space: nowrap;
         }
@@ -84,9 +63,7 @@
             color: #0f172a;
         }
 
-        /* =========================
-           SEARCH
-        ========================= */
+        /* SEARCH */
 
         .search-container {
             flex: 1;
@@ -95,73 +72,47 @@
 
         .search-form {
             display: flex;
-
             height: 46px;
-
             background: #f1f5f9;
-
             border: 1px solid #e2e8f0;
             border-radius: 12px;
-
             overflow: hidden;
         }
 
         .search-form:focus-within {
             background: white;
             border-color: #2563eb;
-
-            box-shadow:
-                0 0 0 3px rgba(37, 99, 235, 0.10);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.10);
         }
 
         .search-form input {
             flex: 1;
-
             min-width: 0;
-
             border: none;
             outline: none;
-
             background: transparent;
-
             padding: 0 15px;
-
-            color: #0f172a;
-        }
-
-        .search-form input::placeholder {
-            color: #94a3b8;
         }
 
         .search-button {
             width: 52px;
-
             border: none;
-
             background: #2563eb;
             color: white;
-
             cursor: pointer;
-
-            transition: 0.2s;
         }
 
         .search-button:hover {
             background: #1d4ed8;
         }
 
-        /* =========================
-           NAVIGATION
-        ========================= */
+        /* NAVIGATION */
 
         .nav-links {
             display: flex;
             align-items: center;
-
             gap: 12px;
-
             color: #475569;
-
             font-size: 14px;
             font-weight: 600;
         }
@@ -170,52 +121,34 @@
             color: #2563eb;
         }
 
-        /* =========================
-           HERO
-        ========================= */
+        /* HERO */
 
         .hero {
-            background:
-                linear-gradient(
-                    135deg,
-                    #eff6ff,
-                    #ffffff
-                );
-
+            background: linear-gradient(135deg, #eff6ff, #ffffff);
             border-bottom: 1px solid #e2e8f0;
         }
 
         .hero-content {
             max-width: 1200px;
-
             margin: auto;
-
             padding: 55px 20px;
         }
 
         .hero-badge {
             display: inline-block;
-
             margin-bottom: 15px;
-
             padding: 7px 13px;
-
             border-radius: 999px;
-
             background: #dbeafe;
             color: #1d4ed8;
-
             font-size: 13px;
             font-weight: 700;
         }
 
         .hero h1 {
             max-width: 650px;
-
             font-size: clamp(34px, 5vw, 52px);
-
             line-height: 1.1;
-
             margin-bottom: 15px;
         }
 
@@ -225,60 +158,35 @@
 
         .hero p {
             max-width: 620px;
-
             color: #64748b;
-
             font-size: 17px;
-
             line-height: 1.7;
         }
 
-        /* =========================
-           MAIN
-        ========================= */
+        /* MAIN */
 
         .main {
             max-width: 1200px;
-
             margin: auto;
-
             padding: 40px 20px 70px;
         }
 
-        /* =========================
-           ERROR MESSAGE
-        ========================= */
-
         .error-message {
             background: #fef2f2;
-
             border: 1px solid #fecaca;
-
             color: #b91c1c;
-
             padding: 14px 16px;
-
             border-radius: 10px;
-
             margin-bottom: 25px;
-
             font-size: 14px;
             font-weight: 600;
         }
 
-        /* =========================
-           SECTION HEADER
-        ========================= */
-
         .section-header {
             display: flex;
-
             align-items: center;
-
             justify-content: space-between;
-
             gap: 20px;
-
             margin-bottom: 25px;
         }
 
@@ -291,83 +199,54 @@
             font-size: 14px;
         }
 
-        /* =========================
-           PRODUCT GRID
-        ========================= */
+        /* PRODUCT GRID */
 
         .product-grid {
             display: grid;
-
-            grid-template-columns:
-                repeat(4, minmax(0, 1fr));
-
+            grid-template-columns: repeat(4, minmax(0, 1fr));
             gap: 22px;
         }
 
-        /* =========================
-           PRODUCT CARD
-        ========================= */
-
         .product-card {
             background: white;
-
             border: 1px solid #e2e8f0;
-
             border-radius: 16px;
-
             overflow: hidden;
-
-            transition:
-                transform 0.2s ease,
-                box-shadow 0.2s ease,
-                border-color 0.2s ease;
+            transition: transform 0.2s ease,
+                box-shadow 0.2s ease, border-color 0.2s ease;
         }
 
         .product-card:hover {
             transform: translateY(-5px);
-
             border-color: #cbd5e1;
-
-            box-shadow:
-                0 15px 35px rgba(15, 23, 42, 0.10);
+            box-shadow: 0 15px 35px rgba(15, 23, 42, 0.10);
         }
 
-        /* =========================
-           PRODUCT IMAGE
-        ========================= */
+        /* PRODUCT IMAGE */
 
         .product-image {
             height: 240px;
-
             background: #f8fafc;
-
             display: flex;
-
             align-items: center;
             justify-content: center;
-
             overflow: hidden;
+            cursor: pointer;
         }
 
         .product-image img {
             width: 100%;
             height: 100%;
-
             object-fit: contain;
-
             padding: 18px;
-
             transition: transform 0.3s ease;
         }
 
-        .product-card:hover
-        .product-image img {
+        .product-card:hover .product-image img {
             transform: scale(1.05);
         }
 
-        /* =========================
-           PRODUCT INFO
-        ========================= */
+        /* PRODUCT INFORMATION */
 
         .product-info {
             padding: 18px;
@@ -375,267 +254,304 @@
 
         .product-name {
             font-size: 17px;
-
             font-weight: 700;
-
             margin-bottom: 8px;
-
             min-height: 44px;
-
             display: -webkit-box;
-
             -webkit-line-clamp: 2;
-
             -webkit-box-orient: vertical;
-
             overflow: hidden;
         }
 
-        /* =========================
-           PRICE
-        ========================= */
+        .product-name button {
+            border: none;
+            background: none;
+            text-align: left;
+            font-weight: inherit;
+            font-size: inherit;
+            cursor: pointer;
+            color: inherit;
+        }
+
+        .product-name button:hover {
+            color: #2563eb;
+        }
 
         .product-price {
             color: #2563eb;
-
             font-size: 20px;
-
             font-weight: 800;
-
             margin-bottom: 10px;
         }
 
-        /* =========================
-           STOCK
-        ========================= */
+        /* STOCK */
 
         .stock {
             font-size: 14px;
-
             margin-bottom: 15px;
         }
 
         .stock-low {
             color: #dc2626;
-
             font-weight: 700;
         }
 
         .stock-available {
             color: #16a34a;
-
             font-weight: 600;
         }
 
-        /* =========================
-           QUANTITY
-        ========================= */
+        /* QUANTITY */
 
         .quantity-label {
             display: block;
-
             color: #475569;
-
             font-size: 13px;
-
             font-weight: 600;
-
             margin-bottom: 6px;
         }
 
         .quantity-input {
             width: 100%;
-
             height: 42px;
-
             border: 1px solid #cbd5e1;
-
             border-radius: 8px;
-
             padding: 0 10px;
-
             outline: none;
-
             background: white;
-
             margin-bottom: 12px;
         }
 
         .quantity-input:focus {
             border-color: #2563eb;
-
-            box-shadow:
-                0 0 0 3px rgba(37, 99, 235, 0.10);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.10);
         }
 
-        /* =========================
-           ADD TO CART
-        ========================= */
+        /* ADD TO CART */
 
         .product-button {
             width: 100%;
-
             padding: 11px;
-
             border: none;
-
             border-radius: 9px;
-
             background: #0f172a;
-
             color: white;
-
             font-size: 14px;
-
             font-weight: 700;
-
             cursor: pointer;
-
-            transition: 0.2s ease;
         }
 
         .product-button:hover {
             background: #2563eb;
-
-            transform: translateY(-1px);
         }
 
-        /* =========================
-           OUT OF STOCK
-        ========================= */
+        /* VIEW DETAILS */
+
+        .view-details {
+            display: block;
+            width: 100%;
+            margin-top: 10px;
+            padding: 9px;
+            border: 1px solid #2563eb;
+            border-radius: 9px;
+            background: white;
+            color: #2563eb;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        .view-details:hover {
+            background: #eff6ff;
+        }
+
+        /* OUT OF STOCK */
 
         .out-of-stock {
             color: #dc2626;
-
             font-size: 14px;
-
             font-weight: 700;
-
             padding: 10px;
-
             background: #fef2f2;
-
             border-radius: 8px;
-
             text-align: center;
         }
 
-        /* =========================
-           EMPTY STATE
-        ========================= */
+        /* EMPTY STATE */
 
         .empty-state {
             background: white;
-
             border: 1px solid #e2e8f0;
-
             border-radius: 16px;
-
             padding: 60px 20px;
-
             text-align: center;
         }
 
         .empty-icon {
             font-size: 45px;
-
             margin-bottom: 15px;
         }
 
         .empty-state h3 {
             margin-bottom: 8px;
-
             font-size: 20px;
         }
 
         .empty-state p {
             color: #64748b;
-
             margin-bottom: 20px;
         }
 
         .clear-search {
             display: inline-block;
-
             padding: 10px 18px;
-
             background: #2563eb;
-
             color: white;
-
             border-radius: 9px;
-
             font-weight: 600;
         }
 
-        .clear-search:hover {
-            background: #1d4ed8;
-        }
-
-        /* =========================
-           FOOTER
-        ========================= */
+        /* FOOTER */
 
         .footer {
             background: #0f172a;
-
             color: #cbd5e1;
-
             padding: 35px 20px;
-
             text-align: center;
         }
 
         .footer strong {
             color: white;
-
             font-size: 18px;
         }
 
         .footer p {
             margin-top: 7px;
-
             font-size: 13px;
         }
 
-        /* =========================
-           TABLET
-        ========================= */
+        /* PRODUCT DETAILS MODAL */
 
-        @media (max-width: 1000px) {
-
-            .product-grid {
-                grid-template-columns:
-                    repeat(3, minmax(0, 1fr));
-            }
-
+        .modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            z-index: 1000;
+            background: rgba(15, 23, 42, 0.70);
+            padding: 20px;
+            align-items: center;
+            justify-content: center;
         }
 
-        /* =========================
-           MOBILE
-        ========================= */
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: white;
+            width: 100%;
+            max-width: 750px;
+            max-height: 90vh;
+            overflow-y: auto;
+            border-radius: 16px;
+            position: relative;
+            padding: 25px;
+            animation: modalOpen 0.2s ease;
+        }
+
+        @keyframes modalOpen {
+            from {
+                opacity: 0;
+                transform: translateY(15px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 12px;
+            right: 15px;
+            width: 38px;
+            height: 38px;
+            border: none;
+            border-radius: 50%;
+            background: #f1f5f9;
+            color: #0f172a;
+            font-size: 23px;
+            cursor: pointer;
+            z-index: 2;
+        }
+
+        .modal-close:hover {
+            background: #e2e8f0;
+        }
+
+        .modal-body {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+            align-items: start;
+            padding-top: 20px;
+        }
+
+        .modal-image {
+            width: 100%;
+            height: 300px;
+            object-fit: contain;
+            background: #f8fafc;
+            border-radius: 12px;
+        }
+
+        .modal-details h2 {
+            font-size: 24px;
+            margin-bottom: 12px;
+        }
+
+        .modal-price {
+            color: #2563eb;
+            font-size: 23px;
+            font-weight: 800;
+            margin-bottom: 15px;
+        }
+
+        .modal-description {
+            color: #475569;
+            font-size: 15px;
+            line-height: 1.8;
+            white-space: pre-wrap;
+            overflow-wrap: anywhere;
+            margin-bottom: 18px;
+        }
+
+        .modal-stock {
+            color: #16a34a;
+            font-weight: 700;
+            font-size: 14px;
+        }
+
+        @media (max-width: 1000px) {
+            .product-grid {
+                grid-template-columns: repeat(3, minmax(0, 1fr));
+            }
+        }
 
         @media (max-width: 700px) {
-
             .nav {
                 flex-wrap: wrap;
-
                 padding-top: 12px;
                 padding-bottom: 12px;
             }
 
             .search-container {
                 order: 3;
-
                 flex-basis: 100%;
-
                 max-width: none;
             }
 
             .product-grid {
-                grid-template-columns:
-                    repeat(2, minmax(0, 1fr));
-
+                grid-template-columns: repeat(2, minmax(0, 1fr));
                 gap: 14px;
             }
 
@@ -655,14 +571,16 @@
                 font-size: 17px;
             }
 
+            .modal-body {
+                grid-template-columns: 1fr;
+            }
+
+            .modal-image {
+                height: 230px;
+            }
         }
 
-        /* =========================
-           SMALL PHONES
-        ========================= */
-
         @media (max-width: 430px) {
-
             .product-grid {
                 grid-template-columns: 1fr;
             }
@@ -674,57 +592,38 @@
             .hero h1 {
                 font-size: 34px;
             }
-
         }
-
     </style>
-
 </head>
 
 <body>
 
-
-<!-- =========================
-     HEADER
-========================= -->
+<!-- HEADER -->
 
 <header class="header">
 
     <nav class="nav">
 
-        <!-- LOGO -->
-
-        <a
-            href="{{ url_for('items_bp.items') }}"
-            class="logo"
-        >
+        <a href="{{ url_for('items_bp.items') }}" class="logo">
             Shop<span>Ease</span>
         </a>
 
-
-        <!-- SEARCH -->
-
         <div class="search-container">
 
-            <form
-                method="GET"
-                action="{{ url_for('items_bp.items') }}"
-                class="search-form"
-            >
+            <form method="GET"
+                  action="{{ url_for('items_bp.items') }}"
+                  class="search-form">
 
                 <input
                     type="search"
                     name="q"
                     value="{{ request.args.get('q', '') }}"
                     placeholder="Search products..."
-                    aria-label="Search products"
-                >
+                    aria-label="Search products">
 
-                <button
-                    type="submit"
-                    class="search-button"
-                    aria-label="Search"
-                >
+                <button type="submit"
+                        class="search-button"
+                        aria-label="Search">
                     🔍
                 </button>
 
@@ -732,22 +631,13 @@
 
         </div>
 
-
-        <!-- NAV LINKS -->
-
         <div class="nav-links">
 
-            <a
-                href="{{ url_for('items_bp.items') }}"
-            >
+            <a href="{{ url_for('items_bp.items') }}">
                 Products
             </a>
 
-            <!-- CART -->
-
-            <a
-                href="{{ url_for('cart_bp.cart') }}"
-            >
+            <a href="{{ url_for('cart_bp.cart') }}">
                 🛒 Cart
             </a>
 
@@ -758,9 +648,7 @@
 </header>
 
 
-<!-- =========================
-     HERO
-========================= -->
+<!-- HERO -->
 
 <section class="hero">
 
@@ -771,14 +659,12 @@
         </div>
 
         <h1>
-            Find what you
-            <span>love.</span>
+            Find what you <span>love.</span>
         </h1>
 
         <p>
-            Discover quality products at competitive
-            prices and enjoy a simple, convenient
-            online shopping experience.
+            Discover quality products at competitive prices
+            and enjoy a simple, convenient online shopping experience.
         </p>
 
     </div>
@@ -786,14 +672,9 @@
 </section>
 
 
-<!-- =========================
-     MAIN
-========================= -->
+<!-- MAIN -->
 
 <main class="main">
-
-
-    <!-- ERROR -->
 
     {% if error %}
 
@@ -812,40 +693,27 @@
 
             {% if request.args.get('q') %}
 
-                <h2>
-                    Search Results
-                </h2>
+                <h2>Search Results</h2>
 
                 <div class="result-count">
-
-                    Results for
-                    "{{ request.args.get('q') }}"
-
+                    Results for "{{ request.args.get('q') }}"
                 </div>
 
             {% else %}
 
-                <h2>
-                    Featured Products
-                </h2>
+                <h2>Featured Products</h2>
 
                 <div class="result-count">
-
                     Explore our available products
-
                 </div>
 
             {% endif %}
 
         </div>
 
-
-        <!-- PRODUCT COUNT -->
-
         <div class="result-count">
 
             {{ items|length }}
-
             product{% if items|length != 1 %}s{% endif %}
 
         </div>
@@ -853,9 +721,7 @@
     </div>
 
 
-    <!-- =========================
-         PRODUCTS
-    ========================= -->
+    <!-- PRODUCTS -->
 
     {% if items %}
 
@@ -865,19 +731,31 @@
 
                 <article class="product-card">
 
-
                     <!-- PRODUCT IMAGE -->
 
-                    <div class="product-image">
+                    <div
+                        class="product-image"
+                        role="button"
+                        tabindex="0"
+                        aria-label="View {{ item.item_name }} details"
+
+                        data-name="{{ item.item_name }}"
+                        data-price="{{ item.price }}"
+                        data-description="{{ item.description or '' }}"
+                        data-quantity="{{ item.quantity }}"
+                        data-image="{{ url_for('static', filename=item.item_photo) if item.item_photo else '' }}"
+
+                        onclick="showProductDetails(this)"
+
+                        onkeydown="if(event.key === 'Enter' || event.key === ' ') {
+                            event.preventDefault();
+                            showProductDetails(this);
+                        }">
 
                         <img
-                            src="{{ url_for(
-                                'static',
-                                filename=item.item_photo
-                            ) }}"
+                            src="{{ url_for('static', filename=item.item_photo) }}"
                             alt="{{ item.item_name }}"
-                            loading="lazy"
-                        >
+                            loading="lazy">
 
                     </div>
 
@@ -886,12 +764,22 @@
 
                     <div class="product-info">
 
-
-                        <!-- NAME -->
-
                         <h3 class="product-name">
 
-                            {{ item.item_name }}
+                            <button
+                                type="button"
+
+                                data-name="{{ item.item_name }}"
+                                data-price="{{ item.price }}"
+                                data-description="{{ item.description or '' }}"
+                                data-quantity="{{ item.quantity }}"
+                                data-image="{{ url_for('static', filename=item.item_photo) if item.item_photo else '' }}"
+
+                                onclick="showProductDetails(this)">
+
+                                {{ item.item_name }}
+
+                            </button>
 
                         </h3>
 
@@ -899,9 +787,7 @@
                         <!-- PRICE -->
 
                         <div class="product-price">
-
                             GHC {{ "%.2f"|format(item.price) }}
-
                         </div>
 
 
@@ -909,99 +795,86 @@
 
                         {% if item.quantity > 0 %}
 
-
                             {% if item.quantity <= 5 %}
 
                                 <div class="stock stock-low">
-
-                                    ⚠️ Only
-                                    {{ item.quantity }}
-                                    left in stock
-
+                                    ⚠️ Only {{ item.quantity }} left in stock
                                 </div>
 
                             {% else %}
 
                                 <div class="stock stock-available">
-
-                                    ✓
-                                    {{ item.quantity }}
-                                    available
-
+                                    ✓ {{ item.quantity }} available
                                 </div>
 
                             {% endif %}
 
 
-                            <!-- =========================
-                                 ADD TO CART FORM
-                            ========================= -->
+                            <!-- ADD TO CART -->
 
                             <form
                                 method="POST"
-                                action="{{ url_for('items_bp.items') }}"
-                            >
-
-
-                                <!-- PRODUCT ID -->
+                                action="{{ url_for('items_bp.items') }}">
 
                                 <input
                                     type="hidden"
                                     name="item_id"
-                                    value="{{ item.id }}"
-                                >
-
-
-                                <!-- QUANTITY -->
+                                    value="{{ item.id }}">
 
                                 <label
                                     for="quantity-{{ item.id }}"
-                                    class="quantity-label"
-                                >
-                                    Quantity
-                                </label>
+                                    class="quantity-label">
 
+                                    Quantity
+
+                                </label>
 
                                 <input
                                     type="number"
                                     id="quantity-{{ item.id }}"
                                     name="cart_quantity"
                                     class="quantity-input"
-
                                     min="1"
                                     max="{{ item.quantity }}"
-
                                     value="1"
-
-                                    required
-                                >
-
-
-                                <!-- BUTTON -->
+                                    required>
 
                                 <button
                                     type="submit"
-                                    class="product-button"
-                                >
+                                    class="product-button">
+
                                     🛒 Add to Cart
+
                                 </button>
 
                             </form>
 
-
                         {% else %}
 
-
-                            <!-- OUT OF STOCK -->
-
                             <div class="out-of-stock">
-
                                 ❌ Out of stock
-
                             </div>
 
-
                         {% endif %}
+
+
+                        <!-- VIEW DETAILS -->
+
+                        <button
+                            type="button"
+                            class="view-details"
+
+                            data-name="{{ item.item_name }}"
+                            data-price="{{ item.price }}"
+                            data-description="{{ item.description or '' }}"
+                            data-quantity="{{ item.quantity }}"
+                            data-image="{{ url_for('static', filename=item.item_photo) if item.item_photo else '' }}"
+
+                            onclick="showProductDetails(this)">
+
+                            View Details
+
+                        </button>
 
                     </div>
 
@@ -1011,65 +884,229 @@
 
         </div>
 
-
     {% else %}
-
-
-        <!-- =========================
-             NO PRODUCTS
-        ========================= -->
 
         <div class="empty-state">
 
-            <div class="empty-icon">
-                🔎
-            </div>
+            <div class="empty-icon">🔎</div>
 
-            <h3>
-                No products found
-            </h3>
+            <h3>No products found</h3>
 
             <p>
-                We couldn't find a product matching
-                your search.
+                We couldn't find a product matching your search.
             </p>
 
             <a
                 href="{{ url_for('items_bp.items') }}"
-                class="clear-search"
-            >
+                class="clear-search">
+
                 View All Products
+
             </a>
 
         </div>
 
-
     {% endif %}
-
 
 </main>
 
 
-<!-- =========================
-     FOOTER
-========================= -->
+<!-- PRODUCT DETAILS MODAL -->
+
+<div
+    class="modal"
+    id="productModal"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="modalProductName"
+    onclick="closeModalOnBackdrop(event)">
+
+    <div class="modal-content">
+
+        <button
+            type="button"
+            class="modal-close"
+            onclick="closeProductModal()"
+            aria-label="Close">
+
+            &times;
+
+        </button>
+
+        <div class="modal-body">
+
+            <img
+                id="modalImage"
+                class="modal-image"
+                src=""
+                alt="Product image">
+
+            <div class="modal-details">
+
+                <h2 id="modalProductName"></h2>
+
+                <div
+                    class="modal-price"
+                    id="modalProductPrice">
+                </div>
+
+                <p
+                    class="modal-description"
+                    id="modalProductDescription">
+                </p>
+
+                <div
+                    class="modal-stock"
+                    id="modalProductStock">
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- FOOTER -->
 
 <footer class="footer">
 
-    <strong>
-        ShopEase
-    </strong>
+    <strong>ShopEase</strong>
 
-    <p>
-        Quality products. Simple shopping.
-    </p>
+    <p>Quality products. Simple shopping.</p>
 
-    <p>
-        © 2026 ShopEase. All rights reserved.
-    </p>
+    <p>© 2026 ShopEase. All rights reserved.</p>
 
 </footer>
 
+
+<!-- JAVASCRIPT -->
+
+<script>
+
+    const productModal = document.getElementById("productModal");
+
+    const modalImage = document.getElementById("modalImage");
+
+    const modalName = document.getElementById("modalProductName");
+
+    const modalPrice = document.getElementById("modalProductPrice");
+
+    const modalDescription = document.getElementById("modalProductDescription");
+
+    const modalStock = document.getElementById("modalProductStock");
+
+
+    // DISPLAY PRODUCT DETAILS
+
+    function showProductDetails(element) {
+
+        const name = element.dataset.name || "Product";
+
+        const price = parseFloat(element.dataset.price);
+
+        const description = element.dataset.description || "";
+
+        const quantity = parseInt(element.dataset.quantity, 10) || 0;
+
+        const image = element.dataset.image || "";
+
+
+        // Product image
+
+        if (image) {
+            modalImage.src = image;
+            modalImage.style.display = "block";
+        } else {
+            modalImage.removeAttribute("src");
+            modalImage.style.display = "none";
+        }
+
+
+        // Product name
+
+        modalName.textContent = name;
+
+
+        // Product price
+
+        modalPrice.textContent =
+            "GHC " + (Number.isFinite(price) ? price.toFixed(2) : "0.00");
+
+
+        // Product description
+
+        modalDescription.textContent = description.trim()
+            ? description
+            : "No description available for this product.";
+
+
+        // Product stock
+
+        if (quantity > 0) {
+
+            modalStock.textContent =
+                quantity + " available in stock";
+
+            modalStock.style.color = "#16a34a";
+
+        } else {
+
+            modalStock.textContent = "Out of stock";
+
+            modalStock.style.color = "#dc2626";
+
+        }
+
+
+        // Show modal
+
+        productModal.classList.add("active");
+
+        document.body.style.overflow = "hidden";
+
+    }
+
+
+    // CLOSE MODAL
+
+    function closeProductModal() {
+
+        productModal.classList.remove("active");
+
+        document.body.style.overflow = "";
+
+    }
+
+
+    // CLOSE WHEN CLICKING OUTSIDE THE MODAL
+
+    function closeModalOnBackdrop(event) {
+
+        if (event.target === productModal) {
+
+            closeProductModal();
+
+        }
+
+    }
+
+
+    // CLOSE WITH ESCAPE KEY
+
+    document.addEventListener("keydown", function(event) {
+
+        if (event.key === "Escape") {
+
+            closeProductModal();
+
+        }
+
+    });
+
+</script>
 
 </body>
 </html>

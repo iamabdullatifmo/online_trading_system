@@ -1,4 +1,13 @@
-from flask import Blueprint, render_template, request, session, url_for, redirect
+from flask import (
+    Blueprint,
+    render_template,
+    request,
+    session,
+    url_for,
+    redirect,
+    jsonify
+)
+
 from models import Items, Cart
 from extentions import db
 
@@ -26,62 +35,113 @@ def items():
 
     # ADD TO CART
     if request.method == "POST":
+
         item_id = request.form.get("item_id")
         cart_quantity = request.form.get("cart_quantity")
 
-        # Validate input
         if not item_id or not cart_quantity:
-            return render_template("shopping.html",items=items,
-                error="Please select a quantity.")
+            return render_template(
+                "shopping.html",
+                items=items,
+                error="Please select a quantity."
+            )
 
         try:
             item_id = int(item_id)
             cart_quantity = int(cart_quantity)
 
         except ValueError:
-            return render_template("shopping.html",items=items,
-                error="Invalid product or quantity.")
+            return render_template(
+                "shopping.html",
+                items=items,
+                error="Invalid product or quantity."
+            )
 
-        # Find product
-        selected_item = Items.query.get(item_id)
+        selected_item = db.session.get(Items, item_id)
 
         if not selected_item:
-            return render_template("shopping.html",items=items,
-                error="Product not found.")
+            return render_template(
+                "shopping.html",
+                items=items,
+                error="Product not found."
+            )
 
-        # Validate quantity
         if cart_quantity <= 0:
-            return render_template("shopping.html",items=items,
-                error="Quantity must be greater than zero.")
+            return render_template(
+                "shopping.html",
+                items=items,
+                error="Quantity must be greater than zero."
+            )
 
-        # Check stock
         if cart_quantity > selected_item.quantity:
-            return render_template("shopping.html",items=items,
+            return render_template(
+                "shopping.html",
+                items=items,
                 error=(
                     f"Only {selected_item.quantity} "
                     f"{selected_item.item_name} "
-                    f"left in stock."))
+                    f"left in stock."
+                )
+            )
 
-        # Check if product is already in this customer's cart
-        existing_cart_item = Cart.query.filter_by(customer_id=customer_id,item_id=selected_item.id).first()
+        existing_cart_item = Cart.query.filter_by(
+            customer_id=customer_id,
+            item_id=selected_item.id
+        ).first()
 
         if existing_cart_item:
-            # Increase existing cart quantity
             existing_cart_item.quantity += cart_quantity
 
         else:
-            # Create new cart item
-            new_cart_item = Cart(customer_id=customer_id,item_id=selected_item.id,quantity=cart_quantity)
+            new_cart_item = Cart(
+                customer_id=customer_id,
+                item_id=selected_item.id,
+                quantity=cart_quantity
+            )
 
             db.session.add(new_cart_item)
 
-        # Reduce available stock
         selected_item.quantity -= cart_quantity
-        # Save
+
         db.session.commit()
 
-        # Go to cart
         return redirect(url_for("cart_bp.cart"))
 
-    # Show products
-    return render_template("shopping.html",items=items)
+    return render_template("shopping.html", items=items)
+
+
+# ==========================================
+# GET PRODUCT DESCRIPTION
+# ==========================================
+
+@items_bp.route("/product/<int:item_id>/details", methods=["GET"])
+def product_details():
+
+    if not session.get("customer_id"):
+        return jsonify({
+            "success": False,
+            "message": "Please log in to view product details."
+        }), 401
+
+    item_id = request.view_args["item_id"]
+
+    selected_item = db.session.get(Items, item_id)
+
+    if not selected_item:
+        return jsonify({
+            "success": False,
+            "message": "Product not found."
+        }), 404
+
+    return jsonify({
+        "success": True,
+        "id": selected_item.id,
+        "name": selected_item.item_name,
+        "price": float(selected_item.price),
+        "description": selected_item.description or "No description available for this product.",
+        "quantity": selected_item.quantity,
+        "image": url_for(
+            "static",
+            filename=selected_item.item_photo
+        ) if selected_item.item_photo else None
+    })

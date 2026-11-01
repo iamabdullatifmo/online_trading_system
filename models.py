@@ -16,6 +16,7 @@ class Items(db.Model):
     item_photo = db.Column(db.String(255))
     price = db.Column(db.Numeric(10, 2))
     quantity = db.Column(db.Integer)
+    description = db.Column(db.Text, nullable=True)
 
 class Cart(db.Model):
     __tablename__ = "cart"

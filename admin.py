@@ -1,3 +1,4 @@
+
 import os
 
 from flask import (
@@ -62,7 +63,7 @@ def admin_required():
         print("NO ADMIN ID - ACCESS DENIED")
         return False
 
-    admin = Admin.query.get(admin_id)
+    admin = db.session.get(Admin, admin_id)
 
     if not admin:
         print("ADMIN NOT FOUND IN DATABASE")
@@ -105,135 +106,64 @@ def admin_login():
         print("USERNAME ENTERED:", username)
         print("PASSWORD PROVIDED:", bool(password))
 
-        # ==============================
         # CHECK FORM
-        # ==============================
 
         if not username or not password:
-
-            print(
-                "LOGIN FAILED: "
-                "Username or password missing"
-            )
 
             flash(
                 "Username and password are required.",
                 "error"
             )
 
-            return render_template(
-                "admin_login.html"
-            )
+            return render_template("admin_login.html")
 
-        # ==============================
         # FIND ADMIN
-        # ==============================
 
         admin = Admin.query.filter_by(
             admin_name=username
         ).first()
 
-        print(
-            "ADMIN FOUND:",
-            admin is not None
-        )
+        print("ADMIN FOUND:", admin is not None)
 
         if not admin:
-
-            print(
-                "LOGIN FAILED: "
-                "Admin does not exist"
-            )
 
             flash(
                 "Invalid admin username or password.",
                 "error"
             )
 
-            return render_template(
-                "admin_login.html"
-            )
+            return render_template("admin_login.html")
 
-        # ==============================
-        # ADMIN DATABASE INFORMATION
-        # ==============================
-
-        print(
-            "ADMIN ID FROM DATABASE:",
-            admin.id
-        )
-
-        print(
-            "ADMIN USERNAME FROM DATABASE:",
-            admin.admin_name
-        )
-
-        print(
-            "ADMIN PASSWORD HASH EXISTS:",
-            bool(admin.password)
-        )
-
-        # ==============================
         # VERIFY PASSWORD
-        # ==============================
 
         password_correct = check_password_hash(
             admin.password,
             password
         )
 
-        print(
-            "PASSWORD CORRECT:",
-            password_correct
-        )
+        print("PASSWORD CORRECT:", password_correct)
 
         if not password_correct:
-
-            print(
-                "LOGIN FAILED: "
-                "Incorrect password"
-            )
 
             flash(
                 "Invalid admin username or password.",
                 "error"
             )
 
-            return render_template(
-                "admin_login.html"
-            )
+            return render_template("admin_login.html")
 
-        # ==============================
         # CREATE ADMIN SESSION
-        # ==============================
 
         session["admin_id"] = admin.id
         session["is_admin"] = True
         session["admin_username"] = admin.admin_name
 
-        # ==============================
-        # VERIFY SESSION
-        # ==============================
-
         print("\n================================")
         print("ADMIN LOGIN SUCCESSFUL")
         print("ADMIN ID:", admin.id)
-        print(
-            "SESSION ADMIN ID:",
-            session.get("admin_id")
-        )
-        print(
-            "SESSION IS ADMIN:",
-            session.get("is_admin")
-        )
-        print(
-            "SESSION ADMIN USERNAME:",
-            session.get("admin_username")
-        )
-        print(
-            "FULL SESSION:",
-            dict(session)
-        )
+        print("SESSION ADMIN ID:", session.get("admin_id"))
+        print("SESSION IS ADMIN:", session.get("is_admin"))
+        print("SESSION ADMIN USERNAME:", session.get("admin_username"))
         print("================================\n")
 
         flash(
@@ -245,14 +175,7 @@ def admin_login():
             url_for("admin.dashboard")
         )
 
-    print(
-        "GET REQUEST - "
-        "SHOWING ADMIN LOGIN PAGE"
-    )
-
-    return render_template(
-        "admin_login.html"
-    )
+    return render_template("admin_login.html")
 
 
 # ============================================================
@@ -263,6 +186,7 @@ def admin_login():
 def dashboard():
 
     if not admin_required():
+
         return redirect(
             url_for("sign_in.sign_in")
         )
@@ -294,12 +218,20 @@ def add_product():
     print("================================")
 
     if not admin_required():
+
         return redirect(
             url_for("sign_in.sign_in")
         )
 
+    # GET FORM DATA
+
     item_name = request.form.get(
         "item_name",
+        ""
+    ).strip()
+
+    description = request.form.get(
+        "description",
         ""
     ).strip()
 
@@ -313,13 +245,9 @@ def add_product():
         ""
     ).strip()
 
-    image = request.files.get(
-        "item_photo"
-    )
+    image = request.files.get("item_photo")
 
-    # ==============================
-    # VALIDATE TEXT FIELDS
-    # ==============================
+    # VALIDATE PRODUCT NAME
 
     if not item_name:
 
@@ -328,9 +256,9 @@ def add_product():
             "error"
         )
 
-        return redirect(
-            url_for("admin.dashboard")
-        )
+        return redirect(url_for("admin.dashboard"))
+
+    # VALIDATE PRICE
 
     if not price:
 
@@ -339,9 +267,9 @@ def add_product():
             "error"
         )
 
-        return redirect(
-            url_for("admin.dashboard")
-        )
+        return redirect(url_for("admin.dashboard"))
+
+    # VALIDATE QUANTITY
 
     if not quantity:
 
@@ -350,13 +278,9 @@ def add_product():
             "error"
         )
 
-        return redirect(
-            url_for("admin.dashboard")
-        )
+        return redirect(url_for("admin.dashboard"))
 
-    # ==============================
     # CONVERT VALUES
-    # ==============================
 
     try:
 
@@ -370,9 +294,7 @@ def add_product():
             "error"
         )
 
-        return redirect(
-            url_for("admin.dashboard")
-        )
+        return redirect(url_for("admin.dashboard"))
 
     if price < 0:
 
@@ -381,9 +303,7 @@ def add_product():
             "error"
         )
 
-        return redirect(
-            url_for("admin.dashboard")
-        )
+        return redirect(url_for("admin.dashboard"))
 
     if quantity < 0:
 
@@ -392,13 +312,9 @@ def add_product():
             "error"
         )
 
-        return redirect(
-            url_for("admin.dashboard")
-        )
+        return redirect(url_for("admin.dashboard"))
 
-    # ==============================
     # CHECK IMAGE
-    # ==============================
 
     if not image or image.filename == "":
 
@@ -407,13 +323,9 @@ def add_product():
             "error"
         )
 
-        return redirect(
-            url_for("admin.dashboard")
-        )
+        return redirect(url_for("admin.dashboard"))
 
-    if not allowed_file(
-        image.filename
-    ):
+    if not allowed_file(image.filename):
 
         flash(
             "Invalid image format. "
@@ -421,13 +333,9 @@ def add_product():
             "error"
         )
 
-        return redirect(
-            url_for("admin.dashboard")
-        )
+        return redirect(url_for("admin.dashboard"))
 
-    # ==============================
     # CREATE UPLOAD DIRECTORY
-    # ==============================
 
     upload_folder = os.path.join(
         "static",
@@ -439,31 +347,19 @@ def add_product():
         exist_ok=True
     )
 
-    # ==============================
     # SAVE IMAGE
-    # ==============================
 
-    filename = secure_filename(
-        image.filename
-    )
+    filename = secure_filename(image.filename)
 
-    # Prevent duplicate filenames
-    base, extension = os.path.splitext(
-        filename
-    )
+    base, extension = os.path.splitext(filename)
 
     counter = 1
 
     while os.path.exists(
-        os.path.join(
-            upload_folder,
-            filename
-        )
+        os.path.join(upload_folder, filename)
     ):
 
-        filename = (
-            f"{base}_{counter}{extension}"
-        )
+        filename = f"{base}_{counter}{extension}"
 
         counter += 1
 
@@ -474,21 +370,17 @@ def add_product():
         )
     )
 
-    # ==============================
     # SAVE PRODUCT TO DATABASE
-    # ==============================
 
     new_item = Items(
         item_name=item_name,
+        description=description,
         price=price,
         quantity=quantity,
         item_photo=f"uploads/{filename}"
     )
 
-    db.session.add(
-        new_item
-    )
-
+    db.session.add(new_item)
     db.session.commit()
 
     flash(
@@ -517,9 +409,7 @@ def delete_product(item_id):
             url_for("sign_in.sign_in")
         )
 
-    item = Items.query.get(
-        item_id
-    )
+    item = db.session.get(Items, item_id)
 
     if not item:
 
@@ -528,13 +418,9 @@ def delete_product(item_id):
             "error"
         )
 
-        return redirect(
-            url_for("admin.dashboard")
-        )
+        return redirect(url_for("admin.dashboard"))
 
-    # ==============================
     # DELETE IMAGE
-    # ==============================
 
     if item.item_photo:
 
@@ -543,22 +429,13 @@ def delete_product(item_id):
             item.item_photo
         )
 
-        if os.path.exists(
-            image_path
-        ):
+        if os.path.exists(image_path):
 
-            os.remove(
-                image_path
-            )
+            os.remove(image_path)
 
-    # ==============================
     # DELETE DATABASE RECORD
-    # ==============================
 
-    db.session.delete(
-        item
-    )
-
+    db.session.delete(item)
     db.session.commit()
 
     flash(
@@ -587,9 +464,7 @@ def edit_product(item_id):
             url_for("sign_in.sign_in")
         )
 
-    item = Items.query.get(
-        item_id
-    )
+    item = db.session.get(Items, item_id)
 
     if not item:
 
@@ -598,13 +473,9 @@ def edit_product(item_id):
             "error"
         )
 
-        return redirect(
-            url_for("admin.dashboard")
-        )
+        return redirect(url_for("admin.dashboard"))
 
-    # ==============================
-    # GET
-    # ==============================
+    # GET: DISPLAY EDIT FORM
 
     if request.method == "GET":
 
@@ -613,12 +484,15 @@ def edit_product(item_id):
             item=item
         )
 
-    # ==============================
-    # POST
-    # ==============================
+    # POST: GET FORM DATA
 
     item_name = request.form.get(
         "item_name",
+        ""
+    ).strip()
+
+    description = request.form.get(
+        "description",
         ""
     ).strip()
 
@@ -632,9 +506,9 @@ def edit_product(item_id):
         ""
     ).strip()
 
-    image = request.files.get(
-        "item_photo"
-    )
+    image = request.files.get("item_photo")
+
+    # VALIDATE PRODUCT NAME
 
     if not item_name:
 
@@ -649,6 +523,8 @@ def edit_product(item_id):
                 item_id=item.id
             )
         )
+
+    # CONVERT PRICE AND QUANTITY
 
     try:
 
@@ -683,23 +559,18 @@ def edit_product(item_id):
             )
         )
 
-    # ==============================
-    # UPDATE BASIC INFORMATION
-    # ==============================
+    # UPDATE PRODUCT INFORMATION
 
     item.item_name = item_name
+    item.description = description
     item.price = price
     item.quantity = quantity
 
-    # ==============================
-    # REPLACE IMAGE
-    # ==============================
+    # REPLACE IMAGE IF A NEW ONE WAS SELECTED
 
     if image and image.filename:
 
-        if not allowed_file(
-            image.filename
-        ):
+        if not allowed_file(image.filename):
 
             flash(
                 "Invalid image format.",
@@ -723,26 +594,17 @@ def edit_product(item_id):
             exist_ok=True
         )
 
-        filename = secure_filename(
-            image.filename
-        )
+        filename = secure_filename(image.filename)
 
-        base, extension = os.path.splitext(
-            filename
-        )
+        base, extension = os.path.splitext(filename)
 
         counter = 1
 
         while os.path.exists(
-            os.path.join(
-                upload_folder,
-                filename
-            )
+            os.path.join(upload_folder, filename)
         ):
 
-            filename = (
-                f"{base}_{counter}{extension}"
-            )
+            filename = f"{base}_{counter}{extension}"
 
             counter += 1
 
@@ -753,9 +615,7 @@ def edit_product(item_id):
             )
         )
 
-        # ==============================
         # DELETE OLD IMAGE
-        # ==============================
 
         if item.item_photo:
 
@@ -764,17 +624,13 @@ def edit_product(item_id):
                 item.item_photo
             )
 
-            if os.path.exists(
-                old_image
-            ):
+            if os.path.exists(old_image):
 
-                os.remove(
-                    old_image
-                )
+                os.remove(old_image)
 
-        item.item_photo = (
-            f"uploads/{filename}"
-        )
+        item.item_photo = f"uploads/{filename}"
+
+    # SAVE CHANGES
 
     db.session.commit()
 
@@ -798,9 +654,7 @@ def edit_product(item_id):
 )
 def admin_orders():
 
-    # ==============================
     # CHECK ADMIN
-    # ==============================
 
     if not admin_required():
 
@@ -809,9 +663,7 @@ def admin_orders():
             "message": "Admin authentication required."
         }), 401
 
-    # ==============================
     # GET ALL ORDERS
-    # ==============================
 
     orders = Order.query.order_by(
         Order.created_at.desc()
@@ -819,112 +671,88 @@ def admin_orders():
 
     result = []
 
-    # ==============================
     # PROCESS ORDERS
-    # ==============================
 
     for order in orders:
 
-        # Get customer
-        customer = Customer.query.get(
+        customer = db.session.get(
+            Customer,
             order.customer_id
         )
 
         purchased_items = []
 
-        # ==============================
-        # GET ITEMS IN THIS ORDER
-        # ==============================
-
         for order_item in order.items:
 
-            item = Items.query.get(
+            item = db.session.get(
+                Items,
                 order_item.item_id
             )
 
             purchased_items.append({
 
-                "item_id":
-                    order_item.item_id,
+                "item_id": order_item.item_id,
 
-                "item_name":
-                    (
-                        item.item_name
-                        if item
-                        else "Item no longer exists"
-                    ),
+                "item_name": (
+                    item.item_name
+                    if item
+                    else "Item no longer exists"
+                ),
 
-                "quantity":
-                    order_item.quantity,
+                "quantity": order_item.quantity,
 
-                "price":
-                    float(order_item.price),
+                "price": float(order_item.price),
 
-                "subtotal":
-                    float(
-                        order_item.price
-                        * order_item.quantity
-                    )
+                "subtotal": float(
+                    order_item.price * order_item.quantity
+                )
+
             })
-
-        # ==============================
-        # ADD ORDER TO RESULT
-        # ==============================
 
         result.append({
 
-            "order_id":
-                order.id,
+            "order_id": order.id,
 
-            "payment_reference":
-                order.payment_reference,
+            "payment_reference": order.payment_reference,
 
-            "amount":
-                order.amount,
+            "amount": order.amount,
 
-            "status":
-                order.status,
+            "status": order.status,
 
-            "created_at":
-                (
-                    order.created_at.isoformat()
-                    if order.created_at
-                    else None
-                ),
+            "created_at": (
+                order.created_at.isoformat()
+                if order.created_at
+                else None
+            ),
 
             "customer": {
 
-                "customer_id":
-                    order.customer_id,
+                "customer_id": order.customer_id,
 
-                "username":
-                    (
-                        customer.username
-                        if customer
-                        else None
-                    ),
+                "username": (
+                    customer.username
+                    if customer
+                    else None
+                ),
 
-                "email":
-                    (
-                        customer.email
-                        if customer
-                        else None
-                    )
+                "email": (
+                    customer.email
+                    if customer
+                    else None
+                )
+
             },
 
-            "items":
-                purchased_items
+            "items": purchased_items
+
         })
 
-    # ==============================
     # RETURN JSON
-    # ==============================
 
     return jsonify({
 
-        "success":
-            True,
+        "success": True,
 
-        "orders":
-            result
+        "orders": result
+
     })

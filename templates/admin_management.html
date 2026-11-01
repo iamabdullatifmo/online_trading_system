@@ -1,258 +1,169 @@
-```html
+
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
     <meta charset="UTF-8">
-
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ShopEase | Admin</title>
 
-
     <style>
-
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
         }
 
-
         body {
-            font-family:
-                Inter,
-                Arial,
-                sans-serif;
-
+            font-family: Inter, Arial, sans-serif;
             background: #f1f5f9;
             color: #0f172a;
         }
 
-
-        /* =========================
-           HEADER
-        ========================= */
-
         .header {
             background: #0f172a;
             color: white;
-
             padding: 18px 30px;
-
             display: flex;
             align-items: center;
             justify-content: space-between;
-
             position: sticky;
             top: 0;
-
             z-index: 100;
         }
-
 
         .logo {
             font-size: 24px;
             font-weight: 800;
         }
 
-
         .logo span {
             color: #60a5fa;
         }
-
 
         .admin-label {
             color: #cbd5e1;
             font-size: 14px;
         }
 
-
-        /* =========================
-           CONTAINER
-        ========================= */
-
         .container {
             max-width: 1200px;
             margin: auto;
-
             padding: 35px 20px 70px;
         }
 
-
-        /* =========================
-           FLASH MESSAGES
-        ========================= */
-
         .flash {
             padding: 14px 18px;
-
             border-radius: 10px;
-
             margin-bottom: 20px;
-
             font-weight: 600;
         }
-
 
         .success {
             background: #dcfce7;
             color: #166534;
-
             border: 1px solid #bbf7d0;
         }
-
 
         .error {
             background: #fee2e2;
             color: #991b1b;
-
             border: 1px solid #fecaca;
         }
-
-
-        /* =========================
-           TITLE
-        ========================= */
 
         .page-title {
             margin-bottom: 25px;
         }
-
 
         .page-title h1 {
             font-size: 32px;
             margin-bottom: 7px;
         }
 
-
         .page-title p {
             color: #64748b;
         }
 
-
-        /* =========================
-           CARD
-        ========================= */
-
         .card {
             background: white;
-
             border: 1px solid #e2e8f0;
-
             border-radius: 16px;
-
             padding: 25px;
-
             margin-bottom: 35px;
-
-            box-shadow:
-                0 5px 20px
-                rgba(
-                    15,
-                    23,
-                    42,
-                    0.05
-                );
+            box-shadow: 0 5px 20px rgba(15, 23, 42, 0.05);
         }
-
 
         .card h2 {
             margin-bottom: 20px;
         }
 
-
-        /* =========================
-           FORM
-        ========================= */
-
         .form-grid {
             display: grid;
-
-            grid-template-columns:
-                repeat(2, 1fr);
-
+            grid-template-columns: repeat(2, 1fr);
             gap: 18px;
         }
-
 
         .form-group {
             display: flex;
             flex-direction: column;
         }
 
-
         .form-group.full {
             grid-column: 1 / -1;
         }
 
-
         label {
             font-size: 14px;
             font-weight: 700;
-
             margin-bottom: 7px;
         }
 
+        input,
+        textarea {
+            width: 100%;
+            border: 1px solid #cbd5e1;
+            border-radius: 9px;
+            outline: none;
+            font-family: inherit;
+            font-size: 14px;
+        }
 
         input {
             height: 45px;
-
-            border: 1px solid #cbd5e1;
-
-            border-radius: 9px;
-
             padding: 0 13px;
-
-            outline: none;
         }
 
+        textarea {
+            min-height: 130px;
+            padding: 13px;
+            resize: vertical;
+            line-height: 1.6;
+        }
 
-        input:focus {
+        input:focus,
+        textarea:focus {
             border-color: #2563eb;
-
-            box-shadow:
-                0 0 0 3px
-                rgba(
-                    37,
-                    99,
-                    235,
-                    .1
-                );
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, .1);
         }
 
-
-        /* =========================
-           DROP ZONE
-        ========================= */
+        .field-hint {
+            color: #64748b;
+            font-size: 12px;
+            margin-top: 6px;
+        }
 
         .drop-zone {
             border: 2px dashed #94a3b8;
-
             border-radius: 14px;
-
             min-height: 230px;
-
             display: flex;
-
             align-items: center;
             justify-content: center;
-
             text-align: center;
-
             cursor: pointer;
-
             transition: .2s;
-
             overflow: hidden;
-
             background: #f8fafc;
         }
-
 
         .drop-zone:hover,
         .drop-zone.dragover {
@@ -260,440 +171,303 @@
             background: #eff6ff;
         }
 
-
         .drop-content {
             padding: 30px;
         }
-
 
         .upload-icon {
             font-size: 45px;
             margin-bottom: 10px;
         }
 
-
         .drop-content strong {
             display: block;
-
             font-size: 17px;
-
             margin-bottom: 7px;
         }
 
-
         .drop-content span {
             color: #64748b;
-
             font-size: 13px;
         }
 
-
         #imagePreview {
             display: none;
-
             width: 100%;
             height: 230px;
-
             object-fit: contain;
-
             padding: 10px;
         }
 
-
-        /* =========================
-           BUTTONS
-        ========================= */
-
         .btn {
             border: none;
-
             border-radius: 9px;
-
             padding: 12px 20px;
-
             cursor: pointer;
-
             font-weight: 700;
-
             transition: .2s;
+            text-decoration: none;
+            display: inline-block;
         }
-
 
         .btn-primary {
             background: #2563eb;
             color: white;
         }
 
-
         .btn-primary:hover {
             background: #1d4ed8;
         }
-
 
         .btn-edit {
             background: #dbeafe;
             color: #1d4ed8;
         }
 
-
         .btn-delete {
             background: #fee2e2;
             color: #dc2626;
         }
-
 
         .btn-refresh {
             background: #0f172a;
             color: white;
         }
 
-
         .btn-refresh:hover {
             background: #1e293b;
         }
-
 
         .form-button {
             margin-top: 20px;
         }
 
-
-        /* =========================
-           PRODUCT TABLE
-        ========================= */
-
         .table-wrapper {
             overflow-x: auto;
         }
 
-
         table {
             width: 100%;
-
             border-collapse: collapse;
-
-            min-width: 700px;
+            min-width: 850px;
         }
-
 
         th {
             text-align: left;
-
             background: #f8fafc;
-
             color: #475569;
-
             font-size: 13px;
-
             padding: 14px;
-
-            border-bottom:
-                1px solid #e2e8f0;
+            border-bottom: 1px solid #e2e8f0;
         }
-
 
         td {
             padding: 14px;
-
-            border-bottom:
-                1px solid #e2e8f0;
-
+            border-bottom: 1px solid #e2e8f0;
             vertical-align: middle;
         }
-
 
         .product-image {
             width: 65px;
             height: 65px;
-
             object-fit: contain;
-
             background: #f8fafc;
-
             border-radius: 9px;
-
             padding: 5px;
         }
-
 
         .product-name {
             font-weight: 700;
         }
 
+        .product-description {
+            max-width: 250px;
+            color: #64748b;
+            font-size: 13px;
+            line-height: 1.5;
+            overflow-wrap: anywhere;
+        }
 
         .price {
             color: #2563eb;
-
             font-weight: 800;
+            white-space: nowrap;
         }
-
 
         .stock {
             font-weight: 700;
         }
 
-
         .stock-low {
             color: #dc2626;
         }
-
 
         .stock-good {
             color: #16a34a;
         }
 
-
         .actions {
             display: flex;
-
             gap: 8px;
         }
 
-
-        /* =========================
-           ORDERS HEADER
-        ========================= */
+        .actions form {
+            margin: 0;
+        }
 
         .orders-header {
             display: flex;
-
             align-items: center;
-
             justify-content: space-between;
-
             gap: 15px;
-
             margin-bottom: 20px;
         }
-
 
         .orders-header h2 {
             margin-bottom: 0;
         }
 
-
         .orders-status {
             color: #64748b;
-
             font-size: 14px;
         }
-
-
-        /* =========================
-           ORDERS TABLE
-        ========================= */
 
         .orders-table {
             min-width: 1100px;
         }
-
 
         .order-id {
             font-weight: 800;
             color: #0f172a;
         }
 
-
         .customer-name {
             font-weight: 700;
         }
 
-
         .customer-email {
             color: #64748b;
-
             font-size: 13px;
-
             margin-top: 3px;
         }
 
-
         .reference {
             font-family: monospace;
-
             font-size: 13px;
-
             background: #f8fafc;
-
             padding: 6px 8px;
-
             border-radius: 6px;
-
             display: inline-block;
         }
-
 
         .status {
             display: inline-block;
-
             padding: 6px 10px;
-
             border-radius: 20px;
-
             font-size: 12px;
-
             font-weight: 800;
-
             text-transform: uppercase;
         }
-
 
         .status-paid {
             background: #dcfce7;
             color: #166534;
         }
 
-
         .status-other {
             background: #fef3c7;
             color: #92400e;
         }
 
-
         .order-items {
             margin-top: 10px;
         }
 
-
         .order-item {
             background: #f8fafc;
-
             border: 1px solid #e2e8f0;
-
             border-radius: 8px;
-
             padding: 10px;
-
             margin-bottom: 7px;
         }
-
 
         .order-item:last-child {
             margin-bottom: 0;
         }
 
-
         .order-item-name {
             font-weight: 700;
-
             margin-bottom: 4px;
         }
 
-
         .order-item-details {
             color: #64748b;
-
             font-size: 13px;
         }
 
-
         .order-total {
             color: #2563eb;
-
             font-weight: 800;
-
             white-space: nowrap;
         }
 
-
-        .empty-orders {
-            text-align: center;
-
-            padding: 50px 20px;
-
-            color: #64748b;
-        }
-
-
+        .empty-orders,
         .loading-orders {
             text-align: center;
-
             padding: 40px;
-
             color: #64748b;
         }
-
 
         .api-error {
             background: #fee2e2;
-
             color: #991b1b;
-
             border: 1px solid #fecaca;
-
             padding: 15px;
-
             border-radius: 10px;
-
             margin-bottom: 20px;
-
             display: none;
         }
 
-
-        /* =========================
-           MOBILE
-        ========================= */
-
         @media (max-width: 700px) {
-
             .header {
                 padding: 15px 18px;
             }
-
 
             .admin-label {
                 display: none;
             }
 
-
             .container {
                 padding: 25px 14px;
             }
-
 
             .form-grid {
                 grid-template-columns: 1fr;
             }
 
-
             .form-group.full {
                 grid-column: auto;
             }
-
 
             .card {
                 padding: 18px;
             }
 
-
             .page-title h1 {
                 font-size: 27px;
             }
 
-
             .orders-header {
                 align-items: flex-start;
-
                 flex-direction: column;
             }
-
         }
-
     </style>
-
 </head>
-
 
 <body>
 
-
-<!-- =========================
-     HEADER
-========================= -->
-
 <header class="header">
-
     <div class="logo">
         Shop<span>Ease</span>
     </div>
@@ -701,66 +475,30 @@
     <div class="admin-label">
         Administrator Panel
     </div>
-
 </header>
-
 
 <main class="container">
 
-
-    <!-- =========================
-         FLASH MESSAGES
-    ========================= -->
-
-    {% with messages = get_flashed_messages(
-        with_categories=true
-    ) %}
-
+    {% with messages = get_flashed_messages(with_categories=true) %}
         {% if messages %}
-
             {% for category, message in messages %}
-
                 <div class="flash {{ category }}">
                     {{ message }}
                 </div>
-
             {% endfor %}
-
         {% endif %}
-
     {% endwith %}
 
-
-
-    <!-- =========================
-         TITLE
-    ========================= -->
-
     <div class="page-title">
-
-        <h1>
-            Product Management
-        </h1>
-
-        <p>
-            Add, edit and manage products
-            available in your store.
-        </p>
-
+        <h1>Product Management</h1>
+        <p>Add, edit and manage products available in your store.</p>
     </div>
 
-
-
-    <!-- =========================
-         ADD PRODUCT
-    ========================= -->
+    <!-- ADD PRODUCT -->
 
     <section class="card">
 
-        <h2>
-            Add New Product
-        </h2>
-
+        <h2>Add New Product</h2>
 
         <form
             method="POST"
@@ -768,17 +506,10 @@
             enctype="multipart/form-data"
         >
 
-
             <div class="form-grid">
 
-
-                <!-- PRODUCT NAME -->
-
                 <div class="form-group full">
-
-                    <label for="item_name">
-                        Product Name
-                    </label>
+                    <label for="item_name">Product Name</label>
 
                     <input
                         type="text"
@@ -787,18 +518,10 @@
                         placeholder="Enter product name"
                         required
                     >
-
                 </div>
 
-
-
-                <!-- PRICE -->
-
                 <div class="form-group">
-
-                    <label for="price">
-                        Price
-                    </label>
+                    <label for="price">Price (GHC)</label>
 
                     <input
                         type="number"
@@ -809,18 +532,10 @@
                         placeholder="0.00"
                         required
                     >
-
                 </div>
 
-
-
-                <!-- STOCK -->
-
                 <div class="form-group">
-
-                    <label for="quantity">
-                        Stock Quantity
-                    </label>
+                    <label for="quantity">Stock Quantity</label>
 
                     <input
                         type="number"
@@ -830,33 +545,40 @@
                         placeholder="0"
                         required
                     >
-
                 </div>
 
-
-
-                <!-- IMAGE -->
+                <!-- NEW PRODUCT DESCRIPTION FIELD -->
 
                 <div class="form-group full">
 
-                    <label>
-                        Product Image
+                    <label for="description">
+                        Product Description
                     </label>
 
+                    <textarea
+                        id="description"
+                        name="description"
+                        placeholder="Describe your product, its features, specifications, quality and condition..."
+                        maxlength="5000"
+                    ></textarea>
 
-                    <div
-                        class="drop-zone"
-                        id="dropZone"
-                    >
+                    <span class="field-hint">
+                        Provide useful information to help customers understand your product.
+                    </span>
 
-                        <div
-                            class="drop-content"
-                            id="dropContent"
-                        >
+                </div>
 
-                            <div class="upload-icon">
-                                🖼️
-                            </div>
+                <!-- PRODUCT IMAGE -->
+
+                <div class="form-group full">
+
+                    <label>Product Image</label>
+
+                    <div class="drop-zone" id="dropZone">
+
+                        <div class="drop-content" id="dropContent">
+
+                            <div class="upload-icon">🖼️</div>
 
                             <strong>
                                 Drag & Drop Product Image
@@ -868,14 +590,12 @@
 
                         </div>
 
-
                         <img
                             id="imagePreview"
                             alt="Image preview"
                         >
 
                     </div>
-
 
                     <input
                         type="file"
@@ -890,7 +610,6 @@
 
             </div>
 
-
             <button
                 type="submit"
                 class="btn btn-primary form-button"
@@ -902,51 +621,26 @@
 
     </section>
 
-
-
-    <!-- =========================
-         PRODUCTS
-    ========================= -->
+    <!-- PRODUCTS TABLE -->
 
     <section class="card">
 
-        <h2>
-            Products
-        </h2>
-
+        <h2>Products</h2>
 
         <div class="table-wrapper">
 
             <table>
 
                 <thead>
-
                     <tr>
-
-                        <th>
-                            Image
-                        </th>
-
-                        <th>
-                            Product
-                        </th>
-
-                        <th>
-                            Price
-                        </th>
-
-                        <th>
-                            Stock
-                        </th>
-
-                        <th>
-                            Actions
-                        </th>
-
+                        <th>Image</th>
+                        <th>Product</th>
+                        <th>Description</th>
+                        <th>Price</th>
+                        <th>Stock</th>
+                        <th>Actions</th>
                     </tr>
-
                 </thead>
-
 
                 <tbody>
 
@@ -955,117 +649,70 @@
                         <tr>
 
                             <td>
-
                                 {% if item.item_photo %}
 
                                     <img
                                         class="product-image"
-                                        src="{{ url_for(
-                                            'static',
-                                            filename=item.item_photo
-                                        ) }}"
+                                        src="{{ url_for('static', filename=item.item_photo) }}"
                                         alt="{{ item.item_name }}"
                                     >
 
                                 {% else %}
-
                                     🖼️
-
                                 {% endif %}
-
                             </td>
 
-
                             <td>
-
                                 <div class="product-name">
                                     {{ item.item_name }}
                                 </div>
-
                             </td>
 
+                            <td>
+                                <div class="product-description">
+                                    {% if item.description %}
+                                        {{ item.description }}
+                                    {% else %}
+                                        No description added.
+                                    {% endif %}
+                                </div>
+                            </td>
 
                             <td>
-
                                 <span class="price">
-
-                                    GHC
-                                    {{ "%.2f"|format(item.price) }}
-
+                                    GHC {{ "%.2f"|format(item.price) }}
                                 </span>
-
                             </td>
-
 
                             <td>
-
-                                <span
-                                    class="
-                                        stock
-                                        {% if item.quantity <= 5 %}
-                                            stock-low
-                                        {% else %}
-                                            stock-good
-                                        {% endif %}
-                                    "
-                                >
-
+                                <span class="stock {% if item.quantity <= 5 %}stock-low{% else %}stock-good{% endif %}">
                                     {{ item.quantity }}
-
                                 </span>
-
                             </td>
-
 
                             <td>
 
                                 <div class="actions">
 
-
-                                    <!-- EDIT -->
-
                                     <a
-                                        href="{{ url_for(
-                                            'admin.edit_product',
-                                            item_id=item.id
-                                        ) }}"
+                                        href="{{ url_for('admin.edit_product', item_id=item.id) }}"
+                                        class="btn btn-edit"
                                     >
-
-                                        <button
-                                            type="button"
-                                            class="btn btn-edit"
-                                        >
-                                            Edit
-                                        </button>
-
+                                        Edit
                                     </a>
-
-
-
-                                    <!-- DELETE -->
 
                                     <form
                                         method="POST"
-                                        action="{{ url_for(
-                                            'admin.delete_product',
-                                            item_id=item.id
-                                        ) }}"
-                                        onsubmit="
-                                            return confirm(
-                                                'Delete this product?'
-                                            );
-                                        "
+                                        action="{{ url_for('admin.delete_product', item_id=item.id) }}"
+                                        onsubmit="return confirm('Delete this product?');"
                                     >
-
                                         <button
                                             type="submit"
                                             class="btn btn-delete"
                                         >
                                             Delete
                                         </button>
-
                                     </form>
-
 
                                 </div>
 
@@ -1073,24 +720,15 @@
 
                         </tr>
 
-
                     {% else %}
 
                         <tr>
-
                             <td
-                                colspan="5"
-                                style="
-                                    text-align:center;
-                                    padding:40px;
-                                    color:#64748b;
-                                "
+                                colspan="6"
+                                style="text-align:center;padding:40px;color:#64748b;"
                             >
-
                                 No products available.
-
                             </td>
-
                         </tr>
 
                     {% endfor %}
@@ -1103,29 +741,19 @@
 
     </section>
 
-
-
-    <!-- ==================================================
-         ORDERS / PURCHASES
-    ================================================== -->
+    <!-- CUSTOMER PURCHASES -->
 
     <section class="card">
 
         <div class="orders-header">
 
             <div>
-
-                <h2>
-                    Customer Purchases
-                </h2>
+                <h2>Customer Purchases</h2>
 
                 <div class="orders-status">
-                    View orders, customers, payment references
-                    and purchased items.
+                    View orders, customers, payment references and purchased items.
                 </div>
-
             </div>
-
 
             <button
                 type="button"
@@ -1137,27 +765,13 @@
 
         </div>
 
+        <div class="api-error" id="ordersError"></div>
 
-        <!-- API ERROR -->
+        <div class="table-wrapper" id="ordersTableWrapper">
 
-        <div
-            class="api-error"
-            id="ordersError"
-        ></div>
-
-
-        <div
-            class="table-wrapper"
-            id="ordersTableWrapper"
-        >
-
-            <div
-                class="loading-orders"
-                id="ordersLoading"
-            >
+            <div class="loading-orders" id="ordersLoading">
                 Loading orders...
             </div>
-
 
             <table
                 class="orders-table"
@@ -1166,677 +780,285 @@
             >
 
                 <thead>
-
                     <tr>
-
-                        <th>
-                            Order
-                        </th>
-
-                        <th>
-                            Customer
-                        </th>
-
-                        <th>
-                            Payment Reference
-                        </th>
-
-                        <th>
-                            Items Purchased
-                        </th>
-
-                        <th>
-                            Amount
-                        </th>
-
-                        <th>
-                            Status
-                        </th>
-
-                        <th>
-                            Date
-                        </th>
-
+                        <th>Order</th>
+                        <th>Customer</th>
+                        <th>Payment Reference</th>
+                        <th>Items Purchased</th>
+                        <th>Amount</th>
+                        <th>Status</th>
+                        <th>Date</th>
                     </tr>
-
                 </thead>
 
-
-                <tbody
-                    id="ordersBody"
-                >
-                </tbody>
+                <tbody id="ordersBody"></tbody>
 
             </table>
-
 
             <div
                 class="empty-orders"
                 id="emptyOrders"
                 style="display:none;"
             >
-
                 No customer purchases found.
-
             </div>
 
         </div>
 
     </section>
 
-
 </main>
 
-
-
 <script>
+    /* IMAGE UPLOAD */
 
-    /* ==================================================
-       IMAGE UPLOAD
-    ================================================== */
+    const dropZone = document.getElementById("dropZone");
+    const fileInput = document.getElementById("item_photo");
+    const preview = document.getElementById("imagePreview");
+    const dropContent = document.getElementById("dropContent");
 
-    const dropZone =
-        document.getElementById("dropZone");
+    dropZone.addEventListener("click", () => {
+        fileInput.click();
+    });
 
-    const fileInput =
-        document.getElementById("item_photo");
-
-    const preview =
-        document.getElementById("imagePreview");
-
-    const dropContent =
-        document.getElementById("dropContent");
-
-
-    /* =========================
-       CLICK TO SELECT
-    ========================= */
-
-    dropZone.addEventListener(
-        "click",
-        () => {
-            fileInput.click();
+    fileInput.addEventListener("change", () => {
+        if (fileInput.files.length > 0) {
+            showPreview(fileInput.files[0]);
         }
-    );
+    });
 
+    dropZone.addEventListener("dragover", (event) => {
+        event.preventDefault();
+        dropZone.classList.add("dragover");
+    });
 
-    /* =========================
-       FILE SELECTED
-    ========================= */
+    dropZone.addEventListener("dragleave", () => {
+        dropZone.classList.remove("dragover");
+    });
 
-    fileInput.addEventListener(
-        "change",
-        () => {
+    dropZone.addEventListener("drop", (event) => {
+        event.preventDefault();
+        dropZone.classList.remove("dragover");
 
-            if (fileInput.files.length > 0) {
+        const files = event.dataTransfer.files;
 
-                showPreview(
-                    fileInput.files[0]
-                );
-
-            }
-
+        if (files.length > 0) {
+            fileInput.files = files;
+            showPreview(files[0]);
         }
-    );
-
-
-    /* =========================
-       DRAG OVER
-    ========================= */
-
-    dropZone.addEventListener(
-        "dragover",
-        (event) => {
-
-            event.preventDefault();
-
-            dropZone.classList.add(
-                "dragover"
-            );
-
-        }
-    );
-
-
-    /* =========================
-       DRAG LEAVE
-    ========================= */
-
-    dropZone.addEventListener(
-        "dragleave",
-        () => {
-
-            dropZone.classList.remove(
-                "dragover"
-            );
-
-        }
-    );
-
-
-    /* =========================
-       DROP
-    ========================= */
-
-    dropZone.addEventListener(
-        "drop",
-        (event) => {
-
-            event.preventDefault();
-
-            dropZone.classList.remove(
-                "dragover"
-            );
-
-
-            const files =
-                event.dataTransfer.files;
-
-
-            if (files.length > 0) {
-
-                fileInput.files = files;
-
-                showPreview(
-                    files[0]
-                );
-
-            }
-
-        }
-    );
-
-
-    /* =========================
-       IMAGE PREVIEW
-    ========================= */
+    });
 
     function showPreview(file) {
-
         if (!file.type.startsWith("image/")) {
-
-            alert(
-                "Please select an image file."
-            );
-
+            alert("Please select an image file.");
+            fileInput.value = "";
             return;
         }
 
+        const reader = new FileReader();
 
-        const reader =
-            new FileReader();
-
-
-        reader.onload =
-            function(event) {
-
-                preview.src =
-                    event.target.result;
-
-                preview.style.display =
-                    "block";
-
-                dropContent.style.display =
-                    "none";
-
-            };
-
+        reader.onload = function(event) {
+            preview.src = event.target.result;
+            preview.style.display = "block";
+            dropContent.style.display = "none";
+        };
 
         reader.readAsDataURL(file);
-
     }
 
 
+    /* ORDERS API */
 
-    /* ==================================================
-       ORDERS API
-    ================================================== */
-
-    const ordersBody =
-        document.getElementById(
-            "ordersBody"
-        );
-
-    const ordersTable =
-        document.getElementById(
-            "ordersTable"
-        );
-
-    const ordersLoading =
-        document.getElementById(
-            "ordersLoading"
-        );
-
-    const emptyOrders =
-        document.getElementById(
-            "emptyOrders"
-        );
-
-    const ordersError =
-        document.getElementById(
-            "ordersError"
-        );
-
-    const refreshOrders =
-        document.getElementById(
-            "refreshOrders"
-        );
-
-
-    /* =========================
-       LOAD ORDERS
-    ========================= */
+    const ordersBody = document.getElementById("ordersBody");
+    const ordersTable = document.getElementById("ordersTable");
+    const ordersLoading = document.getElementById("ordersLoading");
+    const emptyOrders = document.getElementById("emptyOrders");
+    const ordersError = document.getElementById("ordersError");
+    const refreshOrders = document.getElementById("refreshOrders");
 
     async function loadOrders() {
 
-        ordersLoading.style.display =
-            "block";
-
-        ordersTable.style.display =
-            "none";
-
-        emptyOrders.style.display =
-            "none";
-
-        ordersError.style.display =
-            "none";
-
+        ordersLoading.style.display = "block";
+        ordersTable.style.display = "none";
+        emptyOrders.style.display = "none";
+        ordersError.style.display = "none";
         ordersBody.innerHTML = "";
-
 
         try {
 
-            const response =
-                await fetch(
-                    "{{ url_for('admin.admin_orders') }}",
-                    {
-                        method: "GET",
-
-                        headers: {
-                            "Accept":
-                                "application/json"
-                        }
+            const response = await fetch(
+                "{{ url_for('admin.admin_orders') }}",
+                {
+                    method: "GET",
+                    headers: {
+                        "Accept": "application/json"
                     }
-                );
-
-
-            const data =
-                await response.json();
-
-
-            /* =========================
-               AUTHENTICATION ERROR
-            ========================= */
-
-            if (response.status === 401) {
-
-                throw new Error(
-                    "Admin authentication required. Please log in again."
-                );
-
-            }
-
-
-            if (!response.ok || !data.success) {
-
-                throw new Error(
-                    data.message ||
-                    "Unable to load orders."
-                );
-
-            }
-
-
-            /* =========================
-               NO ORDERS
-            ========================= */
-
-            if (
-                !data.orders ||
-                data.orders.length === 0
-            ) {
-
-                ordersLoading.style.display =
-                    "none";
-
-                emptyOrders.style.display =
-                    "block";
-
-                return;
-
-            }
-
-
-            /* =========================
-               DISPLAY ORDERS
-            ========================= */
-
-            data.orders.forEach(
-                order => {
-
-                    const row =
-                        document.createElement(
-                            "tr"
-                        );
-
-
-                    /* CUSTOMER */
-
-                    const customer =
-                        order.customer || {};
-
-
-                    let customerHTML = `
-                        <div class="customer-name">
-                            ${escapeHTML(
-                                customer.username ||
-                                "Unknown customer"
-                            )}
-                        </div>
-
-                        <div class="customer-email">
-                            ${escapeHTML(
-                                customer.email ||
-                                "No email"
-                            )}
-                        </div>
-                    `;
-
-
-                    /* ITEMS */
-
-                    let itemsHTML =
-                        `<div class="order-items">`;
-
-
-                    if (
-                        order.items &&
-                        order.items.length > 0
-                    ) {
-
-                        order.items.forEach(
-                            item => {
-
-                                itemsHTML += `
-
-                                    <div class="order-item">
-
-                                        <div class="order-item-name">
-                                            ${escapeHTML(
-                                                item.item_name
-                                            )}
-                                        </div>
-
-                                        <div class="order-item-details">
-
-                                            Item ID:
-                                            ${escapeHTML(
-                                                String(
-                                                    item.item_id
-                                                )
-                                            )}
-
-                                            <br>
-
-                                            Quantity:
-                                            ${escapeHTML(
-                                                String(
-                                                    item.quantity
-                                                )
-                                            )}
-
-                                            <br>
-
-                                            Price:
-                                            GHC
-                                            ${Number(
-                                                item.price
-                                            ).toFixed(2)}
-
-                                            <br>
-
-                                            Subtotal:
-                                            GHC
-                                            ${Number(
-                                                item.subtotal
-                                            ).toFixed(2)}
-
-                                        </div>
-
-                                    </div>
-
-                                `;
-
-                            }
-                        );
-
-                    } else {
-
-                        itemsHTML += `
-                            <div class="order-item-details">
-                                No items recorded.
-                            </div>
-                        `;
-
-                    }
-
-
-                    itemsHTML +=
-                        `</div>`;
-
-
-                    /* STATUS */
-
-                    const status =
-                        String(
-                            order.status || "unknown"
-                        );
-
-
-                    const statusClass =
-                        status.toLowerCase() === "paid"
-                            ? "status-paid"
-                            : "status-other";
-
-
-                    /* DATE */
-
-                    let formattedDate =
-                        "Unknown";
-
-
-                    if (order.created_at) {
-
-                        const date =
-                            new Date(
-                                order.created_at
-                            );
-
-
-                        if (
-                            !isNaN(
-                                date.getTime()
-                            )
-                        ) {
-
-                            formattedDate =
-                                date.toLocaleString();
-
-                        }
-
-                    }
-
-
-                    /* CREATE ROW */
-
-                    row.innerHTML = `
-
-                        <td>
-
-                            <div class="order-id">
-                                #${escapeHTML(
-                                    String(
-                                        order.order_id
-                                    )
-                                )}
-                            </div>
-
-                        </td>
-
-
-                        <td>
-                            ${customerHTML}
-                        </td>
-
-
-                        <td>
-
-                            <span class="reference">
-
-                                ${escapeHTML(
-                                    order.payment_reference ||
-                                    "No reference"
-                                )}
-
-                            </span>
-
-                        </td>
-
-
-                        <td>
-
-                            ${itemsHTML}
-
-                        </td>
-
-
-                        <td>
-
-                            <span class="order-total">
-
-                                GHC
-                                ${Number(
-                                    order.amount || 0
-                                ).toFixed(2)}
-
-                            </span>
-
-                        </td>
-
-
-                        <td>
-
-                            <span
-                                class="status ${statusClass}"
-                            >
-
-                                ${escapeHTML(
-                                    status
-                                )}
-
-                            </span>
-
-                        </td>
-
-
-                        <td>
-
-                            ${escapeHTML(
-                                formattedDate
-                            )}
-
-                        </td>
-
-                    `;
-
-
-                    ordersBody.appendChild(
-                        row
-                    );
-
                 }
             );
 
+            const data = await response.json();
 
-            ordersLoading.style.display =
-                "none";
+            if (response.status === 401) {
+                throw new Error(
+                    "Admin authentication required. Please log in again."
+                );
+            }
 
-            ordersTable.style.display =
-                "table";
+            if (!response.ok || !data.success) {
+                throw new Error(
+                    data.message || "Unable to load orders."
+                );
+            }
 
-        }
+            if (!data.orders || data.orders.length === 0) {
+                ordersLoading.style.display = "none";
+                emptyOrders.style.display = "block";
+                return;
+            }
 
-        catch (error) {
+            data.orders.forEach(order => {
 
-            console.error(
-                "ORDERS API ERROR:",
-                error
-            );
+                const row = document.createElement("tr");
+                const customer = order.customer || {};
 
+                const customerHTML = `
+                    <div class="customer-name">
+                        ${escapeHTML(customer.username || "Unknown customer")}
+                    </div>
+                    <div class="customer-email">
+                        ${escapeHTML(customer.email || "No email")}
+                    </div>
+                `;
 
-            ordersLoading.style.display =
-                "none";
+                let itemsHTML = `<div class="order-items">`;
 
+                if (order.items && order.items.length > 0) {
 
+                    order.items.forEach(item => {
+
+                        itemsHTML += `
+                            <div class="order-item">
+                                <div class="order-item-name">
+                                    ${escapeHTML(item.item_name || "Unknown item")}
+                                </div>
+
+                                <div class="order-item-details">
+                                    Item ID: ${escapeHTML(String(item.item_id))}<br>
+                                    Quantity: ${escapeHTML(String(item.quantity))}<br>
+                                    Price: GHC ${Number(item.price || 0).toFixed(2)}<br>
+                                    Subtotal: GHC ${Number(item.subtotal || 0).toFixed(2)}
+                                </div>
+                            </div>
+                        `;
+
+                    });
+
+                } else {
+
+                    itemsHTML += `
+                        <div class="order-item-details">
+                            No items recorded.
+                        </div>
+                    `;
+
+                }
+
+                itemsHTML += `</div>`;
+
+                const status = String(order.status || "unknown");
+
+                const statusClass =
+                    status.toLowerCase() === "paid"
+                        ? "status-paid"
+                        : "status-other";
+
+                let formattedDate = "Unknown";
+
+                if (order.created_at) {
+                    const date = new Date(order.created_at);
+
+                    if (!isNaN(date.getTime())) {
+                        formattedDate = date.toLocaleString();
+                    }
+                }
+
+                row.innerHTML = `
+
+                    <td>
+                        <div class="order-id">
+                            #${escapeHTML(String(order.order_id))}
+                        </div>
+                    </td>
+
+                    <td>${customerHTML}</td>
+
+                    <td>
+                        <span class="reference">
+                            ${escapeHTML(order.payment_reference || "No reference")}
+                        </span>
+                    </td>
+
+                    <td>${itemsHTML}</td>
+
+                    <td>
+                        <span class="order-total">
+                            GHC ${Number(order.amount || 0).toFixed(2)}
+                        </span>
+                    </td>
+
+                    <td>
+                        <span class="status ${statusClass}">
+                            ${escapeHTML(status)}
+                        </span>
+                    </td>
+
+                    <td>${escapeHTML(formattedDate)}</td>
+                `;
+
+                ordersBody.appendChild(row);
+
+            });
+
+            ordersLoading.style.display = "none";
+            ordersTable.style.display = "table";
+
+        } catch (error) {
+
+            console.error("ORDERS API ERROR:", error);
+
+            ordersLoading.style.display = "none";
             ordersError.textContent =
-                error.message ||
-                "Failed to load orders.";
+                error.message || "Failed to load orders.";
 
-
-            ordersError.style.display =
-                "block";
+            ordersError.style.display = "block";
 
         }
 
     }
 
 
-
-    /* ==================================================
-       ESCAPE HTML
-       Prevents API data from being interpreted
-       as HTML/JavaScript.
-    ================================================== */
+    /* ESCAPE HTML */
 
     function escapeHTML(value) {
 
-        const div =
-            document.createElement(
-                "div"
-            );
-
-        div.textContent =
-            value;
+        const div = document.createElement("div");
+        div.textContent = value;
 
         return div.innerHTML;
 
     }
 
 
+    /* REFRESH ORDERS */
 
-    /* ==================================================
-       REFRESH BUTTON
-    ================================================== */
-
-    refreshOrders.addEventListener(
-        "click",
-        loadOrders
-    );
+    refreshOrders.addEventListener("click", loadOrders);
 
 
+    /* LOAD ORDERS WHEN PAGE OPENS */
 
-    /* ==================================================
-       LOAD ORDERS WHEN PAGE OPENS
-    ================================================== */
-
-    document.addEventListener(
-        "DOMContentLoaded",
-        loadOrders
-    );
+    document.addEventListener("DOMContentLoaded", loadOrders);
 
 </script>
 
-
 </body>
-
 </html>

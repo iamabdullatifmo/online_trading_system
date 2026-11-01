@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -20,6 +21,7 @@
             color: #111827;
         }
 
+        /* HEADER */
         .header {
             background: white;
             padding: 20px 40px;
@@ -27,9 +29,8 @@
         }
 
         .nav {
-            max-width: 1100px;
+            max-width: 1200px;
             margin: auto;
-
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -53,10 +54,11 @@
             font-weight: bold;
         }
 
+        /* MAIN */
         .main {
-            max-width: 1100px;
+            max-width: 1200px;
             margin: auto;
-            padding: 40px 20px;
+            padding: 35px 20px;
         }
 
         h1 {
@@ -68,90 +70,140 @@
             margin-bottom: 30px;
         }
 
+        /* CART LAYOUT */
         .cart-container {
             display: grid;
-            grid-template-columns: 1fr 330px;
+            grid-template-columns: minmax(0, 1fr) 300px;
             gap: 25px;
+            align-items: start;
         }
 
+        /* TWO PRODUCTS PER ROW */
         .cart-items {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 20px;
+            align-items: stretch;
         }
 
+        /* PRODUCT CARD */
         .cart-item {
             background: white;
-            border: 1px solid #ddd;
-            border-radius: 12px;
-            padding: 18px;
+            border: 1px solid #e5e7eb;
+            border-radius: 10px;
+            padding: 15px;
 
             display: flex;
-            align-items: center;
-            gap: 20px;
+            flex-direction: column;
+            gap: 12px;
+
+            min-width: 0;
+            transition: box-shadow 0.2s ease;
         }
 
+        .cart-item:hover {
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+        }
+
+        /* CLICKABLE PRODUCT AREA */
+        .product-open {
+            width: 100%;
+            border: none;
+            background: transparent;
+            text-align: left;
+            cursor: pointer;
+            color: inherit;
+            font-family: inherit;
+        }
+
+        .product-open:focus-visible {
+            outline: 2px solid #2563eb;
+            outline-offset: 4px;
+            border-radius: 8px;
+        }
+
+        /* PRODUCT IMAGE */
         .cart-image {
-            width: 120px;
-            height: 120px;
-            background: #f3f4f6;
-            border-radius: 10px;
+            width: 100%;
+            height: 190px;
+            background: #f9fafb;
+            border-radius: 8px;
 
             display: flex;
             align-items: center;
             justify-content: center;
 
             overflow: hidden;
-            flex-shrink: 0;
         }
 
         .cart-image img {
             width: 100%;
             height: 100%;
             object-fit: contain;
-            padding: 8px;
+            padding: 10px;
         }
 
+        /* PRODUCT INFORMATION */
         .cart-info {
+            width: 100%;
             flex: 1;
         }
 
         .cart-name {
-            font-size: 19px;
+            font-size: 16px;
             font-weight: bold;
-            margin-bottom: 10px;
+            margin-top: 12px;
+            line-height: 1.4;
+            overflow-wrap: anywhere;
+        }
+
+        .product-open:hover .cart-name {
+            color: #2563eb;
+        }
+
+        .click-hint {
+            color: #2563eb;
+            font-size: 12px;
+            margin-top: 6px;
         }
 
         .cart-price {
             color: #2563eb;
             font-weight: bold;
+            font-size: 16px;
             margin-bottom: 8px;
         }
 
         .cart-quantity {
             color: #6b7280;
+            font-size: 14px;
         }
 
         .cart-subtotal {
-            font-size: 18px;
+            font-size: 17px;
             font-weight: bold;
-            white-space: nowrap;
+            color: #111827;
+            margin-top: 5px;
         }
 
+        /* REMOVE BUTTON */
         .remove-button {
+            width: 100%;
             border: none;
             background: #fee2e2;
             color: #dc2626;
-            padding: 10px 14px;
+            padding: 11px;
             border-radius: 8px;
             cursor: pointer;
             font-weight: bold;
+            font-size: 14px;
         }
 
         .remove-button:hover {
             background: #fecaca;
         }
 
+        /* CART SUMMARY */
         .summary {
             background: white;
             border: 1px solid #ddd;
@@ -165,6 +217,7 @@
 
         .summary h2 {
             margin-bottom: 20px;
+            font-size: 21px;
         }
 
         .summary-row {
@@ -181,6 +234,7 @@
 
             display: flex;
             justify-content: space-between;
+            gap: 10px;
 
             font-size: 20px;
             font-weight: bold;
@@ -188,22 +242,19 @@
 
         .total-price {
             color: #2563eb;
+            white-space: nowrap;
         }
 
+        /* PAYSTACK */
         .paystack-button {
             display: block;
             width: 100%;
-
             margin-top: 25px;
             padding: 14px;
-
             text-align: center;
-
             background: #00c853;
             color: white;
-
             border-radius: 8px;
-
             font-weight: bold;
             text-decoration: none;
         }
@@ -212,20 +263,16 @@
             background: #00a844;
         }
 
+        /* CONTINUE SHOPPING */
         .continue-shopping {
             display: block;
             width: 100%;
-
             margin-top: 12px;
             padding: 13px;
-
             text-align: center;
-
             background: #111827;
             color: white;
-
             border-radius: 8px;
-
             font-weight: bold;
             text-decoration: none;
         }
@@ -234,11 +281,11 @@
             background: #2563eb;
         }
 
+        /* EMPTY CART */
         .empty-cart {
             background: white;
             border: 1px solid #ddd;
             border-radius: 12px;
-
             padding: 70px 20px;
             text-align: center;
         }
@@ -254,35 +301,189 @@
 
         .shop-button {
             display: inline-block;
-
             background: #2563eb;
             color: white;
-
             padding: 12px 20px;
             border-radius: 8px;
-
             text-decoration: none;
             font-weight: bold;
         }
 
-        @media (max-width: 750px) {
+        /* =================================
+           PRODUCT DESCRIPTION MODAL
+        ================================= */
+
+        .modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.65);
+
+            z-index: 9999;
+
+            align-items: center;
+            justify-content: center;
+
+            padding: 20px;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: white;
+            width: 100%;
+            max-width: 650px;
+            max-height: 90vh;
+
+            overflow-y: auto;
+
+            border-radius: 14px;
+            position: relative;
+
+            padding: 25px;
+
+            animation: modalAppear 0.2s ease;
+        }
+
+        @keyframes modalAppear {
+            from {
+                opacity: 0;
+                transform: translateY(15px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 15px;
+            right: 18px;
+
+            width: 35px;
+            height: 35px;
+
+            border: none;
+            border-radius: 50%;
+
+            background: #f3f4f6;
+            color: #111827;
+
+            font-size: 22px;
+            cursor: pointer;
+        }
+
+        .modal-close:hover {
+            background: #fee2e2;
+            color: #dc2626;
+        }
+
+        .modal-image {
+            width: 100%;
+            height: 280px;
+
+            background: #f9fafb;
+            border-radius: 10px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            margin-bottom: 20px;
+            overflow: hidden;
+        }
+
+        .modal-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            padding: 15px;
+        }
+
+        .modal-title {
+            font-size: 23px;
+            margin-bottom: 12px;
+            padding-right: 35px;
+        }
+
+        .modal-price {
+            color: #2563eb;
+            font-size: 21px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .description-heading {
+            font-size: 17px;
+            margin-bottom: 10px;
+        }
+
+        .modal-description {
+            color: #4b5563;
+            font-size: 15px;
+            line-height: 1.8;
+            white-space: pre-wrap;
+            overflow-wrap: anywhere;
+        }
+
+        .no-description {
+            color: #9ca3af;
+            font-style: italic;
+        }
+
+        /* TABLET */
+        @media (max-width: 900px) {
 
             .cart-container {
                 grid-template-columns: 1fr;
-            }
-
-            .cart-item {
-                flex-wrap: wrap;
             }
 
             .summary {
                 position: static;
             }
 
-            .cart-subtotal {
-                margin-left: 140px;
+            .cart-image {
+                height: 170px;
             }
         }
+
+        /* SMALL PHONES */
+        @media (max-width: 400px) {
+
+            .header {
+                padding: 15px;
+            }
+
+            .nav a {
+                margin-left: 8px;
+                font-size: 13px;
+            }
+
+            .main {
+                padding: 25px 12px;
+            }
+
+            .cart-items {
+                grid-template-columns: 1fr;
+            }
+
+            .cart-image {
+                height: 200px;
+            }
+
+            .modal-content {
+                padding: 18px;
+            }
+
+            .modal-image {
+                height: 200px;
+            }
+        }
+
     </style>
 
 </head>
@@ -293,10 +494,7 @@
 
     <nav class="nav">
 
-        <a
-            href="{{ url_for('items_bp.items') }}"
-            class="logo"
-        >
+        <a href="{{ url_for('items_bp.items') }}" class="logo">
             Shop<span>Ease</span>
         </a>
 
@@ -330,34 +528,50 @@
 
         <div class="cart-container">
 
-            <!-- ========================= -->
-            <!-- CART ITEMS -->
-            <!-- ========================= -->
+            <!-- CART PRODUCTS -->
 
             <div class="cart-items">
 
                 {% for cart_item in cart_items %}
 
+                    {% if cart_item.item %}
+
                     <div class="cart-item">
 
-                        <div class="cart-image">
+                        <!-- CLICKABLE PRODUCT IMAGE AND NAME -->
 
-                            <img
-                                src="{{ url_for(
-                                    'static',
-                                    filename=cart_item.item.item_photo
-                                ) }}"
-                                alt="{{ cart_item.item.item_name }}"
-                            >
+                        <button
+                            type="button"
+                            class="product-open"
+                            aria-label="View product details: {{ cart_item.item.item_name }}"
+                        >
 
-                        </div>
+                            <div class="cart-image">
 
+                                <img
+                                    src="{{ url_for(
+                                        'static',
+                                        filename=cart_item.item.item_photo
+                                    ) }}"
+                                    alt="{{ cart_item.item.item_name }}"
+                                >
 
-                        <div class="cart-info">
+                            </div>
 
                             <div class="cart-name">
                                 {{ cart_item.item.item_name }}
                             </div>
+
+                            <div class="click-hint">
+                                Click to view description
+                            </div>
+
+                        </button>
+
+
+                        <!-- PRODUCT DETAILS -->
+
+                        <div class="cart-info">
 
                             <div class="cart-price">
 
@@ -381,9 +595,11 @@
                         </div>
 
 
+                        <!-- SUBTOTAL -->
+
                         <div class="cart-subtotal">
 
-                            GHC
+                            Subtotal: GHC
                             {{ "%.2f"|format(
                                 (cart_item.item.price|float)
                                 * cart_item.quantity
@@ -391,6 +607,8 @@
 
                         </div>
 
+
+                        <!-- REMOVE PRODUCT -->
 
                         <form
                             method="POST"
@@ -409,27 +627,36 @@
 
                         </form>
 
+
+                        <!-- PRODUCT DATA FOR MODAL -->
+
+                        <div
+                            class="product-data"
+                            hidden
+                            data-name="{{ cart_item.item.item_name }}"
+                            data-price="{{ '%.2f'|format(cart_item.item.price|float) }}"
+                            data-image="{{ url_for('static', filename=cart_item.item.item_photo) }}"
+                            data-description="{{ cart_item.item.description|default('', true)|e }}"
+                        ></div>
+
                     </div>
+
+                    {% endif %}
 
                 {% endfor %}
 
             </div>
 
 
-            <!-- ========================= -->
             <!-- CART SUMMARY -->
-            <!-- ========================= -->
 
             <aside class="summary">
 
                 <h2>Cart Summary</h2>
 
-
                 <div class="summary-row">
 
-                    <span>
-                        Items
-                    </span>
+                    <span>Items</span>
 
                     <span>
                         {{ cart_items|length }}
@@ -437,12 +664,9 @@
 
                 </div>
 
-
                 <div class="summary-total">
 
-                    <span>
-                        Total
-                    </span>
+                    <span>Total</span>
 
                     <span class="total-price">
 
@@ -453,18 +677,12 @@
 
                 </div>
 
-
-                <!-- PAYSTACK -->
-
                 <a
                     href="{{ url_for('payment.pay') }}"
                     class="paystack-button"
                 >
                     Pay with Paystack
                 </a>
-
-
-                <!-- CONTINUE SHOPPING -->
 
                 <a
                     href="{{ url_for('items_bp.items') }}"
@@ -480,15 +698,11 @@
 
     {% else %}
 
-        <!-- ========================= -->
         <!-- EMPTY CART -->
-        <!-- ========================= -->
 
         <div class="empty-cart">
 
-            <h2>
-                🛒 Your cart is empty
-            </h2>
+            <h2>🛒 Your cart is empty</h2>
 
             <p>
                 You haven't added any products yet.
@@ -506,6 +720,193 @@
     {% endif %}
 
 </main>
+
+
+<!-- =================================
+     PRODUCT DESCRIPTION MODAL
+================================= -->
+
+<div
+    class="modal"
+    id="productModal"
+    aria-hidden="true"
+>
+
+    <div
+        class="modal-content"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="modalTitle"
+    >
+
+        <button
+            type="button"
+            class="modal-close"
+            id="closeModal"
+            aria-label="Close"
+        >
+            &times;
+        </button>
+
+
+        <div class="modal-image">
+
+            <img
+                id="modalImage"
+                src=""
+                alt=""
+            >
+
+        </div>
+
+
+        <h2
+            class="modal-title"
+            id="modalTitle"
+        ></h2>
+
+
+        <div
+            class="modal-price"
+            id="modalPrice"
+        ></div>
+
+
+        <h3 class="description-heading">
+            Product Description
+        </h3>
+
+
+        <p
+            class="modal-description"
+            id="modalDescription"
+        ></p>
+
+    </div>
+
+</div>
+
+
+<script>
+
+    const modal = document.getElementById("productModal");
+
+    const closeModalButton = document.getElementById("closeModal");
+
+    const modalImage = document.getElementById("modalImage");
+
+    const modalTitle = document.getElementById("modalTitle");
+
+    const modalPrice = document.getElementById("modalPrice");
+
+    const modalDescription = document.getElementById("modalDescription");
+
+
+    // OPEN PRODUCT DESCRIPTION
+
+    document.querySelectorAll(".product-open").forEach(button => {
+
+        button.addEventListener("click", function () {
+
+            const cartCard = this.closest(".cart-item");
+
+            const productData = cartCard.querySelector(".product-data");
+
+            const name = productData.dataset.name;
+
+            const price = productData.dataset.price;
+
+            const image = productData.dataset.image;
+
+            const description = productData.dataset.description;
+
+
+            // Populate modal
+
+            modalTitle.textContent = name;
+
+            modalPrice.textContent = "GHC " + price;
+
+            modalImage.src = image;
+
+            modalImage.alt = name;
+
+
+            // Display description
+
+            if (description.trim() !== "") {
+
+                modalDescription.textContent = description;
+
+                modalDescription.classList.remove("no-description");
+
+            } else {
+
+                modalDescription.textContent =
+                    "No description is available for this product.";
+
+                modalDescription.classList.add("no-description");
+
+            }
+
+
+            // Show modal
+
+            modal.classList.add("active");
+
+            modal.setAttribute("aria-hidden", "false");
+
+            document.body.style.overflow = "hidden";
+
+            closeModalButton.focus();
+
+        });
+
+    });
+
+
+    // CLOSE MODAL
+
+    function closeProductModal() {
+
+        modal.classList.remove("active");
+
+        modal.setAttribute("aria-hidden", "true");
+
+        document.body.style.overflow = "";
+
+    }
+
+
+    closeModalButton.addEventListener("click", closeProductModal);
+
+
+    // CLOSE WHEN CLICKING OUTSIDE
+
+    modal.addEventListener("click", function(event) {
+
+        if (event.target === modal) {
+
+            closeProductModal();
+
+        }
+
+    });
+
+
+    // CLOSE USING ESCAPE KEY
+
+    document.addEventListener("keydown", function(event) {
+
+        if (event.key === "Escape" && modal.classList.contains("active")) {
+
+            closeProductModal();
+
+        }
+
+    });
+
+</script>
 
 </body>
 
